@@ -2,8 +2,13 @@ import express from 'express';
 import cors from 'cors';
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-dotenv.config();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 const app = express();
 const PORT = 3001;
@@ -26,21 +31,37 @@ app.post('/api/send-brochure', async (req, res) => {
 
     const serviceName = service || 'General Inquiry';
 
-    // Create transporter with Gmail SMTP
+    // Debug: log environment variables (without password)
+    console.log('SMTP Configuration:');
+    console.log('SMTP_HOST:', process.env.SMTP_HOST);
+    console.log('SMTP_PORT:', process.env.SMTP_PORT);
+    console.log('SMTP_USER:', process.env.SMTP_USER);
+    console.log('SMTP_PASS configured:', !!process.env.SMTP_PASS);
+
+    if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
+      console.error('Missing SMTP credentials');
+      return res.status(500).json({ error: 'SMTP credentials not configured' });
+    }
+
+    // Create transporter with Titan SMTP
+    const smtpPort = Number(process.env.SMTP_PORT) || 465;
     const transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 587,
-      secure: false,
+      host: process.env.SMTP_HOST || 'smtp.titan.email',
+      port: smtpPort,
+      secure: smtpPort === 465,
       auth: {
-        user: process.env.GMAIL_EMAIL,
-        pass: process.env.GMAIL_APP_PASSWORD,
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
       },
+      tls: {
+        rejectUnauthorized: false
+      }
     });
 
     // Send email to customer with PDF attachment
     console.log('Sending customer email to:', email);
     const customerEmail = await transporter.sendMail({
-      from: process.env.GMAIL_EMAIL,
+      from: process.env.SMTP_USER,
       to: email,
       subject: 'Thank you for your interest in HydroWash',
       text: `Dear ${name},
@@ -70,10 +91,10 @@ HydroWash Team`,
     console.log('Customer email sent:', customerEmail.messageId);
 
     // Send notification email to business
-    const businessEmail = process.env.BUSINESS_EMAIL || 'metaliftsit@gmail.com';
+    const businessEmail = process.env.BUSINESS_EMAIL || process.env.SMTP_USER;
     console.log('Sending business email to:', businessEmail);
     const notificationEmail = await transporter.sendMail({
-      from: process.env.GMAIL_EMAIL,
+      from: process.env.SMTP_USER,
       to: businessEmail,
       subject: '🔥 New Lead: Brochure Request - HydroWash',
       html: `
@@ -118,7 +139,135 @@ HydroWash Team`,
   }
 });
 
+// API route for Instagram posts
+app.get('/api/instagram-posts', async (req, res) => {
+  try {
+    const accessToken = process.env.INSTAGRAM_ACCESS_TOKEN;
+    
+    if (!accessToken) {
+      console.warn('Instagram access token not configured, returning mock data');
+      return res.json({
+        data: [
+          {
+            id: '1',
+            type: 'reel',
+            thumbnail: '/instagram-placeholder-1.jpg',
+            likes: 234,
+            comments: 45,
+            caption: 'Premium ceramic coating transformation ✨',
+          },
+          {
+            id: '2',
+            type: 'post',
+            thumbnail: '/instagram-placeholder-2.jpg',
+            likes: 189,
+            comments: 32,
+            caption: 'Before & After: Deep interior detailing',
+          },
+          {
+            id: '3',
+            type: 'reel',
+            thumbnail: '/instagram-placeholder-3.jpg',
+            likes: 312,
+            comments: 67,
+            caption: 'Paint correction magic 🎨',
+          },
+          {
+            id: '4',
+            type: 'post',
+            thumbnail: '/instagram-placeholder-4.jpg',
+            likes: 156,
+            comments: 28,
+            caption: 'Engine bay detailing excellence',
+          },
+        ],
+        source: 'mock'
+      });
+    }
+
+    // First test if token is valid with a simple user info call
+    console.log('Testing Instagram access token...');
+    const testResponse = await fetch(
+      `https://graph.instagram.com/me?access_token=${accessToken}`
+    );
+    
+    if (!testResponse.ok) {
+      const errorText = await testResponse.text();
+      console.error('Instagram token validation failed:', errorText);
+      console.warn('Token appears invalid, returning mock data');
+      return res.json({
+        data: [
+          {
+            id: '1',
+            type: 'reel',
+            thumbnail: '/instagram-placeholder-1.jpg',
+            likes: 234,
+            comments: 45,
+            caption: 'Premium ceramic coating transformation ✨',
+          },
+          {
+            id: '2',
+            type: 'post',
+            thumbnail: '/instagram-placeholder-2.jpg',
+            likes: 189,
+            comments: 32,
+            caption: 'Before & After: Deep interior detailing',
+          },
+          {
+            id: '3',
+            type: 'reel',
+            thumbnail: '/instagram-placeholder-3.jpg',
+            likes: 312,
+            comments: 67,
+            caption: 'Paint correction magic 🎨',
+          },
+          {
+            id: '4',
+            type: 'post',
+            thumbnail: '/instagram-placeholder-4.jpg',
+            likes: 156,
+            comments: 28,
+            caption: 'Engine bay detailing excellence',
+          },
+        ],
+        source: 'mock'
+      });
+    }
+
+    const userData = await testResponse.json();
+    console.log('Token valid for user:', userData.username);
+
+    const response = await fetch(
+      `https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,thumbnail_url,permalink,like_count,comments_count&limit=8&access_token=${accessToken}`
+    );
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('Instagram API error details:', errorText);
+      throw new Error(`Instagram API error: ${response.statusText} - ${errorText}`);
+    }
+
+    const data = await response.json();
+    
+    const posts = data.data?.map((item) => ({
+      id: item.id,
+      type: item.media_type === 'VIDEO' ? 'reel' : 'post',
+      thumbnail: item.thumbnail_url || item.media_url,
+      likes: item.like_count || 0,
+      comments: item.comments_count || 0,
+      caption: item.caption || '',
+      permalink: item.permalink,
+    })) || [];
+
+    res.json({ data: posts, source: 'api' });
+  } catch (error) {
+    console.error('Error fetching Instagram posts:', error);
+    res.status(500).json({ error: 'Failed to fetch Instagram posts' });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Local API server running on http://localhost:${PORT}`);
   console.log('API endpoint: http://localhost:3001/api/send-brochure');
+  console.log('Instagram endpoint: http://localhost:3001/api/instagram-posts');
 });

@@ -21,6 +21,23 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Handle hash scrolling after route changes
+  useEffect(() => {
+    if (location.hash) {
+      const elementId = location.hash.replace('#', '');
+      // Retry finding element with increasing delays to handle page rendering
+      const scrollToElement = (attempts = 0) => {
+        const element = document.getElementById(elementId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        } else if (attempts < 5) {
+          setTimeout(() => scrollToElement(attempts + 1), 200);
+        }
+      };
+      scrollToElement();
+    }
+  }, [location.hash]);
+
   const navLinks = [
     { label: 'Services', href: '/services', type: 'route' as const },
     { label: 'Pricing', href: '#pricing', type: 'anchor' as const },
@@ -30,12 +47,12 @@ const Navbar = () => {
 
   const handleNavClick = (link: typeof navLinks[0]) => {
     setIsMobileMenuOpen(false);
-    
+
     if (link.type === 'route') {
       // Let Link component handle routing
       return;
     }
-    
+
     // For anchor links
     if (isHomePage) {
       const element = document.querySelector(link.href);
@@ -59,9 +76,9 @@ const Navbar = () => {
         <div className="section-container flex items-center justify-between px-4 sm:px-6">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <img 
-              src="/Logo.png" 
-              alt="HydroWash Car Wash & Detailing Studio" 
+            <img
+              src="/Logo.webp"
+              alt="HydroWash Car Wash & Detailing Studio"
               className="h-10 sm:h-12 w-auto object-contain"
             />
           </Link>
@@ -148,7 +165,7 @@ const Navbar = () => {
               </button>
             )
           ))}
-          
+
           {/* E-warranty link for mobile */}
           <button
             onClick={() => {

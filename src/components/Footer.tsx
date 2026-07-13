@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Instagram, Facebook, Youtube, Send, MapPin } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -8,25 +8,30 @@ const Footer = () => {
   const location = useLocation();
 
   const quickLinks = [
-    { label: 'About', href: '/services#about', isRoute: true },
-    { label: 'Services', href: '/services#services', isRoute: true },
-    { label: 'Gallery', href: '/gallery', isRoute: true },
-    { label: 'Blog', href: '/blog', isRoute: true },
-    { label: 'Process', href: '#process', isRoute: false },
-    { label: 'Contact', href: '#contact', isRoute: false },
+    { label: 'About', href: '/services#about' },
+    { label: 'Services', href: '/services#services' },
+    { label: 'Gallery', href: '/gallery' },
+    { label: 'Blog', href: '/blog' },
+    { label: 'Process', href: '#process' },
+    { label: 'Contact', href: '#contact' },
   ];
 
-  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    if (location.pathname !== '/') {
-      window.location.href = '/' + href;
-    } else {
-      const element = document.getElementById(href.replace('#', ''));
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
+  // Handle hash scrolling after route changes
+  useEffect(() => {
+    if (location.hash) {
+      const elementId = location.hash.replace('#', '');
+      // Retry finding element with increasing delays to handle page rendering
+      const scrollToElement = (attempts = 0) => {
+        const element = document.getElementById(elementId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        } else if (attempts < 5) {
+          setTimeout(() => scrollToElement(attempts + 1), 200);
+        }
+      };
+      scrollToElement();
     }
-  };
+  }, [location.hash]);
 
   const socialLinks = [
     { icon: Instagram, href: 'https://www.instagram.com/hydrowash__?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==', label: 'Instagram' },
@@ -50,12 +55,12 @@ const Footer = () => {
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-2 text-center sm:text-left">
             <img
-              src="/Logo.png"
+              src="/Logo.webp"
               alt="HydroWash Logo"
               className="h-16 sm:h-20 mb-3 sm:mb-4 mx-auto sm:mx-0"
             />
             <p className="text-muted-foreground max-w-md mb-5 sm:mb-6 mx-auto sm:mx-0 text-sm sm:text-base">
-             Voted as the best car wash in the town.
+              Voted as the best car wash in the town.
             </p>
 
             {/* Social Links */}
@@ -81,22 +86,12 @@ const Footer = () => {
             <ul className="space-y-2 sm:space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.label}>
-                  {link.isRoute ? (
-                    <Link
-                      to={link.href}
-                      className="text-muted-foreground hover:text-gold transition-colors duration-300 text-sm"
-                    >
-                      {link.label}
-                    </Link>
-                  ) : (
-                    <a
-                      href={link.href}
-                      onClick={(e) => handleAnchorClick(e, link.href)}
-                      className="text-muted-foreground hover:text-gold transition-colors duration-300 text-sm"
-                    >
-                      {link.label}
-                    </a>
-                  )}
+                  <Link
+                    to={link.href}
+                    className="text-muted-foreground hover:text-gold transition-colors duration-300 text-sm"
+                  >
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -137,7 +132,7 @@ const Footer = () => {
             <p>
               Powered by{' '}
               <a
-                href="https://qbits-main.vercel.app/"
+                href="https://qbitslabs.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gold hover:text-gold/80 transition-colors duration-300"

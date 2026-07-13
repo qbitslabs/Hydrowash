@@ -69,12 +69,16 @@ export const ContactFormProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     if (CONTACT_POPUP_ENABLED) {
-      // Auto-open popup after 2 seconds
-      const timer = setTimeout(() => {
-        setOpen(true);
-      }, 2000);
+      // Check if popup was previously closed
+      const popupClosed = localStorage.getItem('contactPopupClosed');
+      if (!popupClosed) {
+        // Auto-open popup after 2 seconds
+        const timer = setTimeout(() => {
+          setOpen(true);
+        }, 2000);
 
-      return () => clearTimeout(timer);
+        return () => clearTimeout(timer);
+      }
     }
   }, []);
 
@@ -183,6 +187,7 @@ const ContactFormDialog: React.FC = () => {
     if (!isOpen) {
       setShowForm(false);
       form.reset();
+      localStorage.setItem('contactPopupClosed', 'true');
     }
   };
 
@@ -241,7 +246,7 @@ const ContactFormDialog: React.FC = () => {
         <div className="relative w-full">
           <div
             className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: "url('/Hero.png')" }}
+            style={{ backgroundImage: "url('/Hero.webp')" }}
           />
           <div className="absolute inset-0 bg-black/75" />
 

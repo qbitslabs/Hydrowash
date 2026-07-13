@@ -1,13 +1,11 @@
 import { useEffect, useState, useRef } from 'react';
-import { ChevronDown } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { ContactFormTrigger } from '@/components/ContactFormModal';
 import { Button } from '@/components/ui/button';
-import BubbleEffect from '@/components/BubbleEffect';
 
 const HERO_IMAGES = {
-  mobile: '/Hero-Mobile.png',
-  desktop: '/Hero.png',
+  mobile: '/Hero-Mobile.webp',
+  desktop: '/Hero.webp',
 } as const;
 
 const Hero = () => {
@@ -16,6 +14,7 @@ const Hero = () => {
   const [scrollY, setScrollY] = useState(0);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const heroRef = useRef<HTMLDivElement>(null);
+  const throttleRef = useRef<number | null>(null);
 
   // Disable parallax on mobile to prevent text merging
   const parallaxFactor = isMobile ? 0 : 1;
@@ -32,11 +31,17 @@ const Hero = () => {
 
     const handleMouseMove = (e: MouseEvent) => {
       if (heroRef.current) {
-        const rect = heroRef.current.getBoundingClientRect();
-        setMousePosition({
-          x: (e.clientX - rect.left - rect.width / 2) / rect.width,
-          y: (e.clientY - rect.top - rect.height / 2) / rect.height,
-        });
+        // Throttle mousemove to ~16ms (60fps)
+        if (throttleRef.current === null) {
+          throttleRef.current = window.requestAnimationFrame(() => {
+            const rect = heroRef.current!.getBoundingClientRect();
+            setMousePosition({
+              x: (e.clientX - rect.left - rect.width / 2) / rect.width,
+              y: (e.clientY - rect.top - rect.height / 2) / rect.height,
+            });
+            throttleRef.current = null;
+          });
+        }
       }
     };
 
@@ -46,6 +51,9 @@ const Hero = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('mousemove', handleMouseMove);
+      if (throttleRef.current !== null) {
+        window.cancelAnimationFrame(throttleRef.current);
+      }
     };
   }, []);
 
@@ -55,7 +63,6 @@ const Hero = () => {
 
   return (
     <section ref={heroRef} className="relative h-screen w-full overflow-hidden pt-20">
-      <BubbleEffect />
       {/* Multi-layer Parallax Background */}
       <div className="absolute inset-0">
         {/* Base image layer — mobile vs laptop/desktop */}

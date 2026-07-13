@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { publicVideos } from 'virtual:public-videos';
 
-const STUDIO_VIDEO_POSTER = '/Hero.png';
+const STUDIO_VIDEO_POSTER = '/Hero.webp';
 
 const StudioVideo = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -34,22 +34,24 @@ const StudioVideo = () => {
 
   return (
     <section
-      className="relative w-full h-[8cm] overflow-hidden"
+      className="relative w-full overflow-hidden bg-black"
       aria-label="Studio showcase video"
     >
-      <video
-        key={videoSrc}
-        ref={videoRef}
-        className="absolute inset-0 h-full w-full object-cover"
-        poster={STUDIO_VIDEO_POSTER}
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
-      >
-        <source src={videoSrc} />
-      </video>
+      <div className="mx-auto aspect-[16/9] w-full max-w-[950px]">
+        <video
+          key={videoSrc}
+          ref={videoRef}
+          className="absolute inset-0 h-full w-full object-cover object-center"
+          poster={STUDIO_VIDEO_POSTER}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
+        >
+          <source src={videoSrc} />
+        </video>
+      </div>
     </section>
   );
 };

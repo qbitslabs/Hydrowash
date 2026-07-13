@@ -8,141 +8,88 @@ import type { WorkCategory } from '@/data/ourWorkData';
 const BeforeAfterSlider = ({ beforeImage, afterImage, title }: { beforeImage: string; afterImage: string; title: string }) => {
   const [position, setPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
-  const [imagesLoaded, setImagesLoaded] = useState({ before: false, after: false });
   const containerRef = React.useRef<HTMLDivElement>(null);
 
   const updatePosition = React.useCallback((clientX: number) => {
-    const el = containerRef.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    if (rect.width === 0) return;
-    const percent = ((clientX - rect.left) / rect.width) * 100;
-    setPosition(Math.max(0, Math.min(100, percent)));
+    const rect = containerRef.current?.getBoundingClientRect();
+    if (!rect?.width) return;
+
+    const nextPosition = ((clientX - rect.left) / rect.width) * 100;
+    setPosition(Math.max(0, Math.min(100, nextPosition)));
   }, []);
 
   React.useEffect(() => {
     if (!isDragging) return;
 
-    const onPointerMove = (e: PointerEvent) => updatePosition(e.clientX);
-    const onPointerUp = () => setIsDragging(false);
+    const handlePointerMove = (event: PointerEvent) => updatePosition(event.clientX);
+    const stopDragging = () => setIsDragging(false);
 
-    window.addEventListener('pointermove', onPointerMove);
-    window.addEventListener('pointerup', onPointerUp);
-    window.addEventListener('pointercancel', onPointerUp);
+    window.addEventListener('pointermove', handlePointerMove);
+    window.addEventListener('pointerup', stopDragging);
+    window.addEventListener('pointercancel', stopDragging);
 
     return () => {
-      window.removeEventListener('pointermove', onPointerMove);
-      window.removeEventListener('pointerup', onPointerUp);
-      window.removeEventListener('pointercancel', onPointerUp);
+      window.removeEventListener('pointermove', handlePointerMove);
+      window.removeEventListener('pointerup', stopDragging);
+      window.removeEventListener('pointercancel', stopDragging);
     };
   }, [isDragging, updatePosition]);
 
-  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
-    e.preventDefault();
+  const startDragging = (event: React.PointerEvent<HTMLDivElement>) => {
+    event.currentTarget.setPointerCapture(event.pointerId);
     setIsDragging(true);
-    updatePosition(e.clientX);
+    updatePosition(event.clientX);
   };
-
-  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (e.pointerType === 'mouse' && !isDragging) {
-      updatePosition(e.clientX);
-    }
-  };
-
-  const isReady = imagesLoaded.before && imagesLoaded.after;
 
   return (
     <div className="relative aspect-[4/3] overflow-hidden rounded-3xl group">
       <div className="pointer-events-none absolute -inset-1 rounded-[28px] bg-gradient-to-br from-gold/30 via-gold/10 to-gold/30 opacity-60 blur-sm" />
-
       <div
         ref={containerRef}
-        className="relative h-full touch-none cursor-ew-resize select-none overflow-hidden rounded-3xl"
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
+        className="relative h-full w-full touch-none cursor-ew-resize select-none overflow-hidden rounded-3xl bg-muted/40"
+        onPointerDown={startDragging}
         role="slider"
+        tabIndex={0}
         aria-label={`${title} before and after comparison`}
         aria-valuemin={0}
         aria-valuemax={100}
         aria-valuenow={Math.round(position)}
+        onKeyDown={(event) => {
+          if (event.key === 'ArrowLeft') setPosition((value) => Math.max(0, value - 5));
+          if (event.key === 'ArrowRight') setPosition((value) => Math.min(100, value + 5));
+          if (event.key === 'Home') setPosition(0);
+          if (event.key === 'End') setPosition(100);
+        }}
       >
-        {/* After Image (Full - Bottom Layer) */}
         <img
           src={afterImage}
-          alt={`${title} - After`}
-          className="h-full w-full object-cover"
-          draggable={false}
+          alt={`${title} after`}
+          className="absolute inset-0 h-full w-full object-contain object-center"
           loading="lazy"
-          onLoad={() => setImagesLoaded((s) => ({ ...s, after: true }))}
-          onError={(e) => {
-            (e.target as HTMLImageElement).src = '/images/placeholder-after.jpg';
-          }}
+          draggable={false}
         />
-        
-        {/* Before Image (Clipped - Top Layer) */}
-        <div
-          className="absolute inset-0 overflow-hidden"
+        <img
+          src={beforeImage}
+          alt={`${title} before`}
+          className="absolute inset-0 h-full w-full object-contain object-center"
           style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}
-        >
-          <img
-            src={beforeImage}
-            alt={`${title} - Before`}
-            className="h-full w-full object-cover"
-            draggable={false}
-            loading="lazy"
-            onLoad={() => setImagesLoaded((s) => ({ ...s, before: true }))}
-            onError={(e) => {
-              (e.target as HTMLImageElement).src = '/images/placeholder-before.jpg';
-            }}
-          />
-          <div className="pointer-events-none absolute inset-0 bg-black/10" />
-        </div>
-
-        {/* Slider Divider Line */}
+          loading="lazy"
+          draggable={false}
+        />
         <div
-          className={cn(
-            'absolute top-0 bottom-0 z-20 w-1 bg-gold shadow-[0_0_20px_rgba(212,175,55,0.6)]',
-            !isDragging && 'transition-[left] duration-75'
-          )}
+          className="pointer-events-none absolute inset-y-0 z-10 w-1 bg-gold shadow-[0_0_16px_rgba(212,175,55,0.7)]"
           style={{ left: `${position}%`, transform: 'translateX(-50%)' }}
         >
-          {/* Slider Handle */}
-          <div 
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center shadow-xl transition-transform duration-200 hover:scale-105"
-          >
-            <div className="flex items-center gap-0.5 text-background">
-              <svg className="w-4 h-4 -mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-              </svg>
-              <svg className="w-4 h-4 -ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-              </svg>
-            </div>
+          <div className="absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-gold text-background shadow-xl">
+            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M8 7l-5 5 5 5M16 7l5 5-5 5M3 12h18" />
+            </svg>
           </div>
         </div>
-
-        {/* Labels with enhanced styling */}
-        <div className="pointer-events-none absolute left-5 top-5 z-10">
-          <div className="bg-background/95 backdrop-blur-md px-4 py-2 rounded-xl border border-border/50 shadow-lg">
-            <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Before</span>
-          </div>
-        </div>
-        <div className="pointer-events-none absolute right-5 top-5 z-10">
-          <div className="bg-gold px-4 py-2 rounded-xl shadow-lg shadow-gold/30">
-            <span className="text-xs font-bold uppercase tracking-widest text-background">After</span>
-          </div>
-        </div>
-
-        
-        {!isReady && (
-          <div className="absolute inset-0 z-30 flex items-center justify-center bg-muted/80">
-            <div className="h-8 w-8 animate-spin rounded-full border-2 border-gold border-t-transparent" />
-          </div>
-        )}
-
-        {/* Hover Border Effect */}
-        <div className="pointer-events-none absolute inset-0 rounded-3xl border-2 border-gold/0 transition-all duration-500 group-hover:border-gold/40" />
+        <div className="pointer-events-none absolute left-4 top-4 rounded-lg bg-background/90 px-3 py-1.5 text-xs font-bold uppercase tracking-widest text-foreground shadow-md">Before</div>
+        <div className="pointer-events-none absolute right-4 top-4 rounded-lg bg-gold px-3 py-1.5 text-xs font-bold uppercase tracking-widest text-background shadow-md">After</div>
       </div>
+      <div className="pointer-events-none absolute inset-0 rounded-3xl border-2 border-gold/0 transition-all duration-500 group-hover:border-gold/40" />
     </div>
   );
 };
@@ -168,8 +115,7 @@ const OurWork = () => {
             Our <span className="text-gold-gradient">Services</span> in Action
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Drag the slider on each image to see the stunning before and after transformation 
-            across our three core specializations.
+            Drag the handle on each image to reveal the transformation across our three core specializations.
           </p>
         </div>
 
@@ -184,7 +130,7 @@ const OurWork = () => {
               )}
               style={{ transitionDelay: `${index * 150}ms` }}
             >
-              {/* Before/After Comparison Image */}
+              {/* Before/After Comparison */}
               <div className={cn(
                 "relative",
                 index % 2 === 1 && "lg:order-2"
@@ -277,7 +223,7 @@ const OurWork = () => {
             Do you need help in choosing a service?
           </p>
           <a
-            href="https://wa.me/919876543210"
+            href="https://wa.me/918888899936"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-gold inline-flex items-center gap-3"

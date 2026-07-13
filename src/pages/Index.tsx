@@ -1,18 +1,20 @@
+import { lazy, Suspense } from 'react';
 import Loader from '@/components/Loader';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
-import Services from '@/components/Services';
-import BrandCarousel from '@/components/BrandCarousel';
-import OurWork from '@/components/OurWork';
-import Pricing from '@/components/Pricing';
-import Stats from '@/components/Stats';
-import Gallery from '@/components/Gallery';
-import Process from '@/components/Process';
-import InstagramTopPicks from '@/components/InstagramTopPicks';
-import Testimonials from '@/components/Testimonials';
-import StudioVideo from '@/components/StudioVideo';
-import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
+
+const Services = lazy(() => import('@/components/Services'));
+const BrandCarousel = lazy(() => import('@/components/BrandCarousel'));
+const OurWork = lazy(() => import('@/components/OurWork'));
+const Pricing = lazy(() => import('@/components/Pricing'));
+const Stats = lazy(() => import('@/components/Stats'));
+const Gallery = lazy(() => import('@/components/Gallery'));
+const Process = lazy(() => import('@/components/Process'));
+const InstagramTopPicks = lazy(() => import('@/components/InstagramTopPicks'));
+const Testimonials = lazy(() => import('@/components/Testimonials'));
+const StudioVideo = lazy(() => import('@/components/StudioVideo'));
+const Contact = lazy(() => import('@/components/Contact'));
 
 const Index = () => {
   return (
@@ -29,54 +31,76 @@ const Index = () => {
         <Hero />
 
         {/* Studio Video - full-width strip below hero */}
-        <StudioVideo />
+        <Suspense fallback={<div className="h-64 flex items-center justify-center"><div className="h-8 w-8 animate-spin rounded-full border-2 border-gold border-t-transparent" /></div>}>
+          <StudioVideo />
+        </Suspense>
         
         {/* Services - Luxury Showcase */}
-        <Services />
+        <Suspense fallback={<div className="h-64 flex items-center justify-center"><div className="h-8 w-8 animate-spin rounded-full border-2 border-gold border-t-transparent" /></div>}>
+          <Services />
+        </Suspense>
         
         {/* Brand Carousel - Trusted Partners */}
-        <BrandCarousel 
-          logos={[
-            '/Brand.png',
-            '/Brand.png',
-            '/Brand.png',
-            '/Brand.png',
-            '/Brand.png',
-            '/Brand.png',
-            '/Brand.png',
-          ]}
-        />
+        <Suspense fallback={<div className="h-64 flex items-center justify-center"><div className="h-8 w-8 animate-spin rounded-full border-2 border-gold border-t-transparent" /></div>}>
+          <BrandCarousel 
+            logos={[
+              '/Brand.png',
+              '/Brand.png',
+              '/Brand.png',
+              '/Brand.png',
+              '/Brand.png',
+              '/Brand.png',
+              '/Brand.png',
+            ]}
+          />
+        </Suspense>
         
         {/* Our Work - Featured Projects */}
         <section id="work">
-          <OurWork />
+          <Suspense fallback={<div className="h-64 flex items-center justify-center"><div className="h-8 w-8 animate-spin rounded-full border-2 border-gold border-t-transparent" /></div>}>
+            <OurWork />
+          </Suspense>
         </section>
         
         {/* Pricing - Transparent Packages */}
         <section id="pricing">
-          <Pricing />
+          <Suspense fallback={<div className="h-64 flex items-center justify-center"><div className="h-8 w-8 animate-spin rounded-full border-2 border-gold border-t-transparent" /></div>}>
+            <Pricing />
+          </Suspense>
         </section>
         
         {/* Stats - Why Choose Us */}
-        <Stats />
+        <Suspense fallback={<div className="h-64 flex items-center justify-center"><div className="h-8 w-8 animate-spin rounded-full border-2 border-gold border-t-transparent" /></div>}>
+          <Stats />
+        </Suspense>
         
         {/* Gallery - Transformation Experience */}
-        <Gallery />
+        <Suspense fallback={<div className="h-64 flex items-center justify-center"><div className="h-8 w-8 animate-spin rounded-full border-2 border-gold border-t-transparent" /></div>}>
+          <Gallery />
+        </Suspense>
         
         {/* Process - Our Methodology */}
         <section id="process">
-          <Process />
+          <Suspense fallback={<div className="h-64 flex items-center justify-center"><div className="h-8 w-8 animate-spin rounded-full border-2 border-gold border-t-transparent" /></div>}>
+            <Process />
+          </Suspense>
         </section>
         
         {/* Instagram Top Picks */}
-        <InstagramTopPicks />
+        <Suspense fallback={<div className="h-64 flex items-center justify-center"><div className="h-8 w-8 animate-spin rounded-full border-2 border-gold border-t-transparent" /></div>}>
+          <InstagramTopPicks />
+        </Suspense>
         
         {/* Testimonials - Premium Reviews */}
-        <Testimonials />
+        <Suspense fallback={<div className="h-64 flex items-center justify-center"><div className="h-8 w-8 animate-spin rounded-full border-2 border-gold border-t-transparent" /></div>}>
+          <Testimonials />
+        </Suspense>
         
         {/* Contact - Trust Section */}
         <section id="contact">
-          <Contact />
+          <Suspense fallback={<div className="h-64 flex items-center justify-center"><div className="h-8 w-8 animate-spin rounded-full border-2 border-gold border-t-transparent" /></div>}>
+            <Contact />
+          </Suspense>
         </section>
       </main>
       

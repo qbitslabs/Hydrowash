@@ -12,43 +12,7 @@ const Gallery = () => {
   const [filter, setFilter] = useState<FilterCategory>('all');
   const [lightboxImage, setLightboxImage] = useState<GalleryImage | null>(null);
   const [comparePosition, setComparePosition] = useState(50);
-  const [imageDimensions, setImageDimensions] = useState<Record<number, { width: number; height: number; aspectRatio: number }>>({});
 
-  // Load image dimensions
-  useEffect(() => {
-    const loadDimensions = async () => {
-      const dimensions: Record<number, { width: number; height: number; aspectRatio: number }> = {};
-      
-      const promises = autoGalleryImages.map((image) => {
-        return new Promise<void>((resolve) => {
-          const img = new Image();
-          img.onload = () => {
-            dimensions[image.id] = {
-              width: img.naturalWidth,
-              height: img.naturalHeight,
-              aspectRatio: img.naturalWidth / img.naturalHeight
-            };
-            resolve();
-          };
-          img.onerror = () => {
-            // Fallback dimensions if image fails to load
-            dimensions[image.id] = {
-              width: 800,
-              height: 600,
-              aspectRatio: 1.33
-            };
-            resolve();
-          };
-          img.src = image.src;
-        });
-      });
-
-      await Promise.all(promises);
-      setImageDimensions(dimensions);
-    };
-
-    loadDimensions();
-  }, []);
 
   const filteredImages = filter === 'all'
     ? autoGalleryImages.slice(0, 8)
