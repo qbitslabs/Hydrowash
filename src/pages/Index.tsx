@@ -11,7 +11,6 @@ const Pricing = lazy(() => import('@/components/Pricing'));
 const Stats = lazy(() => import('@/components/Stats'));
 const Gallery = lazy(() => import('@/components/Gallery'));
 const Process = lazy(() => import('@/components/Process'));
-const InstagramTopPicks = lazy(() => import('@/components/InstagramTopPicks'));
 const Testimonials = lazy(() => import('@/components/Testimonials'));
 const StudioVideo = lazy(() => import('@/components/StudioVideo'));
 const Contact = lazy(() => import('@/components/Contact'));
@@ -85,11 +84,6 @@ const Index = () => {
             <Process />
           </Suspense>
         </section>
-        
-        {/* Instagram Top Picks */}
-        <Suspense fallback={<div className="h-64 flex items-center justify-center"><div className="h-8 w-8 animate-spin rounded-full border-2 border-gold border-t-transparent" /></div>}>
-          <InstagramTopPicks />
-        </Suspense>
         
         {/* Testimonials - Premium Reviews */}
         <Suspense fallback={<div className="h-64 flex items-center justify-center"><div className="h-8 w-8 animate-spin rounded-full border-2 border-gold border-t-transparent" /></div>}>
