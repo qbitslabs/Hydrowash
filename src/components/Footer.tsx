@@ -12,8 +12,8 @@ const Footer = () => {
     { label: 'Services', href: '/services#services' },
     { label: 'Gallery', href: '/gallery' },
     { label: 'Blog', href: '/blog' },
-    { label: 'Process', href: '#process' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Process', href: '/#process' },
+    { label: 'Contact', href: '/#contact' },
   ];
 
   // Handle hash scrolling after route changes

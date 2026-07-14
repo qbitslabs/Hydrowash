@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { ContactFormTrigger } from '@/components/ContactFormModal';
 import { Button } from '@/components/ui/button';
 
 const Navbar = () => {
@@ -112,11 +111,11 @@ const Navbar = () => {
             >
               E-warranty
             </button>
-            <ContactFormTrigger>
+            <a href="https://wa.me/918888899936?text=Hello%2C%20I%20would%20like%20to%20book%20a%20car%20wash.">
               <Button variant="outline" size="sm" className="px-3 py-1 rounded-full border border-gold/30 text-gold text-xs uppercase tracking-wider hover:bg-gold/10 hover:border-gold transition-all duration-300 bg-transparent h-auto">
                 Book Now
               </Button>
-            </ContactFormTrigger>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -181,7 +180,10 @@ const Navbar = () => {
             E-warranty
           </button>
 
-          <ContactFormTrigger onClick={() => setIsMobileMenuOpen(false)}>
+          <a
+            href="https://wa.me/918888899936?text=Hello%2C%20I%20would%20like%20to%20book%20a%20car%20wash."
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
             <Button
               className={cn(
                 "btn-gold mt-2 sm:mt-4 text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 transition-all duration-300 bg-gold hover:bg-gold/90 text-black",
@@ -191,7 +193,7 @@ const Navbar = () => {
             >
               Book Now
             </Button>
-          </ContactFormTrigger>
+          </a>
         </div>
       </div>
     </>

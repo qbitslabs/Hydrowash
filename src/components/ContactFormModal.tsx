@@ -31,6 +31,7 @@ import { Loader2, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export const CONTACT_POPUP_ENABLED = true;
+const CONTACT_POPUP_SESSION_KEY = 'contactPopupClosed';
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -69,8 +70,9 @@ export const ContactFormProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     if (CONTACT_POPUP_ENABLED) {
-      // Check if popup was previously closed
-      const popupClosed = localStorage.getItem('contactPopupClosed');
+      // Show once per browsing session. A visitor who dismisses it will not
+      // see it again until they start a new browser session.
+      const popupClosed = sessionStorage.getItem(CONTACT_POPUP_SESSION_KEY);
       if (!popupClosed) {
         // Auto-open popup after 2 seconds
         const timer = setTimeout(() => {
@@ -187,7 +189,7 @@ const ContactFormDialog: React.FC = () => {
     if (!isOpen) {
       setShowForm(false);
       form.reset();
-      localStorage.setItem('contactPopupClosed', 'true');
+      sessionStorage.setItem(CONTACT_POPUP_SESSION_KEY, 'true');
     }
   };
 
@@ -220,6 +222,7 @@ const ContactFormDialog: React.FC = () => {
         title: 'Thank you!',
         description: "We've sent the brochure to your email. Please check your inbox (and spam folder if needed).",
       });
+      sessionStorage.setItem(CONTACT_POPUP_SESSION_KEY, 'true');
       setOpen(false);
       setShowForm(false);
       form.reset();

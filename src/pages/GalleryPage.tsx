@@ -8,9 +8,12 @@ import { autoGalleryImages } from '@/data/galleryImagesAuto';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
+const INITIAL_IMAGE_COUNT = 12;
+
 const GalleryPage = () => {
   const { ref, isVisible } = useScrollReveal({ threshold: 0 });
   const [filter, setFilter] = useState<FilterCategory>('all');
+  const [visibleImageCount, setVisibleImageCount] = useState(INITIAL_IMAGE_COUNT);
   const [lightboxImage, setLightboxImage] = useState<GalleryImage | null>(null);
   const [comparePosition, setComparePosition] = useState(50);
 
@@ -18,6 +21,12 @@ const GalleryPage = () => {
   const filteredImages = filter === 'all'
     ? autoGalleryImages
     : autoGalleryImages.filter(img => img.category === filter);
+  const visibleImages = filteredImages.slice(0, visibleImageCount);
+
+  const handleFilterChange = (nextFilter: FilterCategory) => {
+    setFilter(nextFilter);
+    setVisibleImageCount(INITIAL_IMAGE_COUNT);
+  };
 
   // Gallery tile content component
   const GalleryTileContent = ({ 
@@ -44,6 +53,7 @@ const GalleryPage = () => {
           alt={image.alt}
           className="w-full h-full object-cover transition-all duration-700 ease-premium group-hover:scale-105 group-hover:brightness-105 sm:group-hover:scale-110 sm:group-hover:brightness-110"
           loading="lazy"
+          decoding="async"
           style={{
             WebkitTapHighlightColor: 'transparent',
             WebkitTouchCallout: 'none',
@@ -170,7 +180,7 @@ const GalleryPage = () => {
               {galleryFilters.map((f) => (
                 <button
                   key={f.value}
-                  onClick={() => setFilter(f.value)}
+                  onClick={() => handleFilterChange(f.value)}
                   className={cn(
                     "px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-medium uppercase tracking-wider transition-all duration-300",
                     filter === f.value
@@ -189,7 +199,7 @@ const GalleryPage = () => {
         <div className="section-container pb-16 sm:pb-24 md:pb-32">
           <div className="w-full px-0 sm:px-4 md:px-0">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4 h-full auto-rows-[200px]">
-              {filteredImages.map((image, index) => {
+              {visibleImages.map((image, index) => {
                 // Standard grid pattern - all tiles same size
                 const getBentoConfig = (idx: number) => {
                   return { gridClass: 'col-span-1 row-span-1', type: 'standard', label: 'DETAIL' };
@@ -208,11 +218,9 @@ const GalleryPage = () => {
                       "shadow-lg shadow-black/10 hover:shadow-2xl hover:shadow-black/20",
                       "transform hover:scale-[1.02] hover:-translate-y-1",
                       "bg-gradient-to-br from-card/50 to-card/80 hover:from-gold/5 hover:to-gold/10",
-                      "backdrop-blur-sm hover:backdrop-blur-md",
                       "relative z-10",
                       "hover:shadow-xl",
                       "hover:from-gold/20 hover:to-gold/30",
-                      "hover:backdrop-blur-lg",
                       isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                     )}
                     style={{ transitionDelay: `${index * 50}ms` }}
@@ -259,6 +267,18 @@ const GalleryPage = () => {
             {filteredImages.length === 0 && (
               <div className="text-center py-16">
                 <p className="text-muted-foreground text-lg">No images found for this category.</p>
+              </div>
+            )}
+
+            {visibleImageCount < filteredImages.length && (
+              <div className="mt-8 text-center">
+                <button
+                  type="button"
+                  onClick={() => setVisibleImageCount((count) => count + INITIAL_IMAGE_COUNT)}
+                  className="rounded-full border border-gold/50 px-6 py-3 text-sm font-semibold text-gold transition-colors hover:bg-gold hover:text-background"
+                >
+                  Load More Images
+                </button>
               </div>
             )}
           </div>
