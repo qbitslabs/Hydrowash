@@ -2,7 +2,7 @@
 // Update this file to change the before/after images in the Our Work section
 // Supports both external URLs and local paths from public folder
 
-import { Shield, Droplets, Sparkles } from 'lucide-react';
+import { Shield, Droplets, Sparkles, Sun, Palette } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
 export interface WorkCategory {
@@ -65,6 +65,32 @@ export const workCategories: WorkCategory[] = [
       { value: '4.9★', label: 'Rating' },
     ],
     features: ['Paint correction', 'Interior restoration', 'Engine bay cleaning', 'Leather treatment'],
+  },
+  {
+    id: 'headlight-restoration',
+    title: 'Headlight Restoration',
+    icon: Sun,
+    description: 'Professional wet-sanding, polishing, and UV sealing that restores foggy or yellowed headlights to crystal-clear clarity.',
+    beforeImage: '/images/Before%20HR.webp',
+    afterImage: '/images/After%20HR.webp',
+    stats: [
+      { value: '90%', label: 'Light Restored' },
+      { value: '2yr', label: 'UV Protection' },
+    ],
+    features: ['Wet-sanding process', 'Crystal-clear finish', 'UV-resistant sealant', 'Safer night driving'],
+  },
+  {
+    id: 'car-wrap',
+    title: 'Car Wrap',
+    icon: Palette,
+    description: 'Premium vinyl wraps give your vehicle a distinctive new look while protecting its original paint from daily wear.',
+    beforeImage: '/images/Before%20Wrap.webp',
+    afterImage: '/images/After%20Wrap.webp',
+    stats: [
+      { value: '100+', label: 'Wraps Applied' },
+      { value: '5yr', label: 'Durability' },
+    ],
+    features: ['Premium vinyl film', 'Custom colour options', 'Paint protection', 'Removable finish'],
   },
 ];
 

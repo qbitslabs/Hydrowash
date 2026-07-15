@@ -115,7 +115,7 @@ const OurWork = () => {
             Our <span className="text-gold-gradient">Services</span> in Action
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Drag the handle on each image to reveal the transformation across our three core specializations.
+            Drag the handle on each image to reveal the transformation across our five core specializations.
           </p>
         </div>
 
