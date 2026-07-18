@@ -3,6 +3,7 @@ import Loader from '@/components/Loader';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Footer from '@/components/Footer';
+import InstagramTopPicks from '@/components/InstagramTopPicks';
 
 const Services = lazy(() => import('@/components/Services'));
 const BrandCarousel = lazy(() => import('@/components/BrandCarousel'));
@@ -85,6 +86,14 @@ const Index = () => {
           </Suspense>
         </section>
         
+
+        {/* Instagram Top Picks */}
+        <section id="process">
+          <Suspense fallback={<div className="h-64 flex items-center justify-center"><div className="h-8 w-8 animate-spin rounded-full border-2 border-gold border-t-transparent" /></div>}>
+            <InstagramTopPicks />
+          </Suspense>
+        </section>
+
         {/* Testimonials - Premium Reviews */}
         <Suspense fallback={<div className="h-64 flex items-center justify-center"><div className="h-8 w-8 animate-spin rounded-full border-2 border-gold border-t-transparent" /></div>}>
           <Testimonials />
