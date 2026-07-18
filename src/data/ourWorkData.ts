@@ -34,23 +34,9 @@ export const workCategories: WorkCategory[] = [
     afterImage: '/images/After%20PPF.webp',
     stats: [
       { value: '150+', label: 'PPF Jobs' },
-      { value: '5yr', label: 'Warranty' },
+      { value: '8yr', label: 'Warranty' },
     ],
     features: ['Self-healing technology', 'UV protection', 'Invisible finish', 'Stone chip protection'],
-  },
-  {
-    id: 'ceramic',
-    title: 'Ceramic Coating',
-    icon: Droplets,
-    description: 'Professional-grade 9H ceramic coating that provides years of hydrophobic protection with a stunning mirror-like finish.',
-    // Update these paths with your Ceramic before/after images
-    beforeImage: '/images/Before%20CC.webp',
-    afterImage: '/images/After%20CC.webp',
-    stats: [
-      { value: '450+', label: 'Coatings' },
-      { value: '2yr', label: 'Protection' },
-    ],
-    features: ['9H hardness', 'Hydrophobic', 'Chemical resistant', 'UV protection'],
   },
   {
     id: 'detailing',
@@ -88,10 +74,38 @@ export const workCategories: WorkCategory[] = [
     afterImage: '/images/After%20Wrap.webp',
     stats: [
       { value: '100+', label: 'Wraps Applied' },
-      { value: '5yr', label: 'Durability' },
+      { value: '3yr', label: 'Durability' },
     ],
     features: ['Premium vinyl film', 'Custom colour options', 'Paint protection', 'Removable finish'],
   },
+
+  {
+    id: 'Engine Treatment',
+    title: 'Engine Treatment',
+    icon: Palette,
+    description: 'Professional-grade engine treatment that restores the original shine and protection of your vehicle\'s engine.',
+    beforeImage: '/images/Before%20ET.webp',
+    afterImage: '/images/After%20ET.webp',
+    stats: [
+      { value: '150+', label: 'Engines Treated' },
+      { value: '30 Min ', label: 'Service Time' },
+    ],
+    features: ['Professional-grade treatment', 'Original shine restoration', 'Protection from corrosion', 'Long-lasting finish'],
+  },
+  {
+    id: 'Alloy Treatment',
+    title: 'Alloy Treatment',
+    icon: Palette,
+    description: 'Professional-grade alloy treatment that restores the original shine and protection of your vehicle\'s alloy wheels.',
+    beforeImage: '/images/Before%20AT.webp',
+    afterImage: '/images/After%20AT.webp',
+    stats: [
+      { value: '100+', label: 'Alloy Wheels Treated' },
+      { value: 'Premium', label: 'Alloy Care' },
+    ],
+    features: ['Professional-grade treatment', 'Original shine restoration', 'Protection from corrosion', 'Long-lasting finish'],
+  },
+  
 ];
 
 // Example with local images (commented out):
