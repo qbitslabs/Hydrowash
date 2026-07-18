@@ -1,19 +1,41 @@
 import { useState, useEffect } from 'react';
 
-interface InstagramPost {
+export interface InstagramPost {
   id: string;
-  type: 'post' | 'reel';
+  mediaType: 'IMAGE' | 'VIDEO' | 'CAROUSEL_ALBUM';
+  mediaUrl: string;
   thumbnail: string;
-  likes: number;
-  comments: number;
   caption: string;
+  permalink: string;
+}
+
+interface GraphApiMediaItem {
+  id: string;
+  media_type?: string;
+  media_url?: string;
+  thumbnail_url?: string;
+  caption?: string;
   permalink?: string;
 }
 
-interface InstagramResponse {
-  data: InstagramPost[];
-  source: 'api' | 'mock';
+interface GraphApiResponse {
+  data?: GraphApiMediaItem[];
 }
+
+const mapMediaType = (type?: string): InstagramPost['mediaType'] => {
+  if (type === 'VIDEO') return 'VIDEO';
+  if (type === 'CAROUSEL_ALBUM') return 'CAROUSEL_ALBUM';
+  return 'IMAGE';
+};
+
+const transformPost = (item: GraphApiMediaItem): InstagramPost => ({
+  id: item.id,
+  mediaType: mapMediaType(item.media_type),
+  mediaUrl: item.media_url ?? '',
+  thumbnail: item.thumbnail_url ?? item.media_url ?? '',
+  caption: item.caption ?? '',
+  permalink: item.permalink ?? '',
+});
 
 export const useInstagramPosts = () => {
   const [posts, setPosts] = useState<InstagramPost[]>([]);
@@ -24,56 +46,21 @@ export const useInstagramPosts = () => {
     const fetchPosts = async () => {
       try {
         setLoading(true);
-        const apiUrl = import.meta.env.DEV
-          ? 'http://localhost:3001/api/instagram-posts'
-          : '/api/instagram-posts';
+        const apiUrl =
+          import.meta.env.VITE_INSTAGRAM_API_URL 
         const response = await fetch(apiUrl);
-        
+
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        
-        const data: InstagramResponse = await response.json();
-        setPosts(data.data);
+
+        const data: GraphApiResponse = await response.json();
+        const transformed = (data.data ?? []).map(transformPost);
+        setPosts(transformed);
         setError(null);
-      } catch (err) {
-        console.error('Error fetching Instagram posts:', err);
+      } catch {
         setError('Failed to load Instagram posts');
-        // Fallback to mock data on error
-        setPosts([
-          {
-            id: '1',
-            type: 'reel',
-            thumbnail: '/instagram-placeholder-1.jpg',
-            likes: 234,
-            comments: 45,
-            caption: 'Premium ceramic coating transformation ✨',
-          },
-          {
-            id: '2',
-            type: 'post',
-            thumbnail: '/instagram-placeholder-2.jpg',
-            likes: 189,
-            comments: 32,
-            caption: 'Before & After: Deep interior detailing',
-          },
-          {
-            id: '3',
-            type: 'reel',
-            thumbnail: '/instagram-placeholder-3.jpg',
-            likes: 312,
-            comments: 67,
-            caption: 'Paint correction magic 🎨',
-          },
-          {
-            id: '4',
-            type: 'post',
-            thumbnail: '/instagram-placeholder-4.jpg',
-            likes: 156,
-            comments: 28,
-            caption: 'Engine bay detailing excellence',
-          },
-        ]);
+        setPosts([]);
       } finally {
         setLoading(false);
       }
