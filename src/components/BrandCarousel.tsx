@@ -6,6 +6,8 @@ import { brandImages } from '@/data/brandImagesAuto';
 const BrandCarousel = ({ logos }: { logos?: string[] }) => {
   const { ref, isVisible } = useScrollReveal();
   const brandList = brandImages;
+  const firstRow = brandList.slice(0, 14);
+  const secondRow = brandList.slice(14);
 
   return (
     <section className="w-full overflow-hidden bg-background py-20 md:py-28">
@@ -29,42 +31,45 @@ const BrandCarousel = ({ logos }: { logos?: string[] }) => {
           </div>
 
           {/* Grid Blocks Layout */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 max-w-5xl mx-auto px-4">
-            {brandList.map((brand, index) => (
-              brand.link ? (
-                <a
-                  key={brand.name}
-                  href={brand.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="aspect-square rounded-2xl flex flex-col items-center justify-center bg-black shadow-[0_0_15px_rgba(255,255,255,0.15),0_0_30px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(255,255,255,0.25),0_0_50px_rgba(255,255,255,0.15)] hover:-translate-y-1.5 transition-all duration-500 group overflow-hidden border border-white/10"
-                  style={{
-                    transitionDelay: `${(index % 4) * 60}ms`
-                  }}
-                >
-                  <img
-                    src={brand.url}
-                    alt={brand.name}
-                    className="w-full h-full object-contain p-4 sm:p-6 transition-all duration-500 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                </a>
-              ) : (
+          {/* Premium Marquee Layout */}
+          <div className="space-y-8 overflow-hidden">
+            {[firstRow, secondRow].map((row, rowIndex) => (
+              <div key={rowIndex} className="relative overflow-hidden">
                 <div
-                  key={brand.name}
-                  className="aspect-square rounded-2xl flex flex-col items-center justify-center bg-black shadow-[0_0_15px_rgba(255,255,255,0.15),0_0_30px_rgba(255,255,255,0.1)] hover:shadow-[0_0_25px_rgba(255,255,255,0.25),0_0_50px_rgba(255,255,255,0.15)] hover:-translate-y-1.5 transition-all duration-500 group overflow-hidden border border-white/10"
-                  style={{
-                    transitionDelay: `${(index % 5) * 60}ms`
-                  }}
+                  className={`flex w-max gap-6 ${rowIndex === 0
+                      ? "animate-brand-marquee"
+                      : "animate-brand-marquee-reverse"
+                    }`}
                 >
-                  <img
-                    src={brand.url}
-                    alt={brand.name}
-                    className="w-full h-full object-contain p-4 sm:p-6 transition-all duration-500 group-hover:scale-105"
-                    loading="lazy"
-                  />
+                  {[...row, ...row].map((brand, index) => {
+                    const Card = (
+                      <div className="flex h-36 w-36 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-black shadow-[0_0_15px_rgba(255,255,255,0.12)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_25px_rgba(255,255,255,0.2)]">
+                        <img
+                          src={brand.url}
+                          alt={brand.name}
+                          loading="lazy"
+                          className="max-h-20 max-w-[80%] object-contain transition-transform duration-300 hover:scale-105"
+                        />
+                      </div>
+                    );
+
+                    return brand.link ? (
+                      <a
+                        key={`${brand.name}-${index}`}
+                        href={brand.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {Card}
+                      </a>
+                    ) : (
+                      <div key={`${brand.name}-${index}`}>
+                        {Card}
+                      </div>
+                    );
+                  })}
                 </div>
-              )
+              </div>
             ))}
           </div>
         </div>

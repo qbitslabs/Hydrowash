@@ -773,3 +773,28 @@
 
 
 
+@keyframes brand-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes brand-marquee-reverse {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.animate-brand-marquee {
+  animation: brand-marquee 35s linear infinite;
+}
+
+.animate-brand-marquee-reverse {
+  animation: brand-marquee-reverse 35s linear infinite;
+}

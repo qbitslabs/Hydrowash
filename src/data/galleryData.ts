@@ -81,6 +81,9 @@ export const galleryFilters: { value: FilterCategory; label: string }[] = [
   { value: 'ppf', label: 'PPF' },
   { value: 'ceramic', label: 'Ceramic' },
   { value: 'detailing', label: 'Detailing' },
+  { value: 'interior', label: 'Interior' },
+  { value: 'wash', label: 'Wash' },
+  { value: 'restoration', label: 'Restoration' },
 ];
 
 // Helper function to get images by category

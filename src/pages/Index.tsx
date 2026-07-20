@@ -42,17 +42,7 @@ const Index = () => {
         
         {/* Brand Carousel - Trusted Partners */}
         <Suspense fallback={<div className="h-64 flex items-center justify-center"><div className="h-8 w-8 animate-spin rounded-full border-2 border-gold border-t-transparent" /></div>}>
-          <BrandCarousel 
-            logos={[
-              '/Brand.png',
-              '/Brand.png',
-              '/Brand.png',
-              '/Brand.png',
-              '/Brand.png',
-              '/Brand.png',
-              '/Brand.png',
-            ]}
-          />
+          <BrandCarousel/>
         </Suspense>
         
         {/* Our Work - Featured Projects */}
