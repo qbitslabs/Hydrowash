@@ -156,7 +156,7 @@ const GalleryPage = () => {
         {/* Gallery Grid - Bento Grid */}
         <div className="section-container pb-16 sm:pb-24 md:pb-32">
   <div className="w-full px-0 sm:px-4 md:px-0">
-    <div className="grid h-full auto-rows-[200px] grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-3 lg:grid-cols-4 md:gap-4">
+    <div className="grid h-full auto-rows-[200px] grid-cols-2 gap-2 sm:grid-cols-2 sm:gap-3 lg:grid-cols-4 md:gap-4">
       {visibleImages.map((image, index) => (
         <div
           key={image.id}

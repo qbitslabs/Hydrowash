@@ -19,7 +19,7 @@ export const blogPosts: BlogPost[] = [
     image: '/images/blog/ceramic-coating-vs-ppf.png',
     category: 'Protection',
     author: 'HydroWash Team',
-    date: '2026-03-10',
+    date: '2026-03-15',
     readTime: '6 min read',
     content: [
       'Indian roads expose your car to stone chips, dust, UV rays, and monsoon moisture every single day. Two of the most popular long-term protection options are ceramic coating and paint protection film (PPF). Both preserve your paint, but they work in different ways.',
@@ -57,7 +57,7 @@ export const blogPosts: BlogPost[] = [
     image: '/images/blog/paint-correction-guide.png',
     category: 'Detailing',
     author: 'HydroWash Team',
-    date: '2026-02-05',
+    date: '2026-01-10',
     readTime: '7 min read',
     content: [
       'Paint correction is a multi-stage machine polishing process that removes defects from your car\'s clear coat — swirl marks, light scratches, oxidation, and holograms left by improper washing.',
@@ -76,7 +76,7 @@ export const blogPosts: BlogPost[] = [
     image: '/images/blog/interior-detailing-benefits.png',
     category: 'Interior',
     author: 'HydroWash Team',
-    date: '2026-01-18',
+    date: '2026-03-15',
     readTime: '4 min read',
     content: [
       'Your car\'s interior is where you spend the most time, yet it often receives the least care. Dust, food particles, sweat, and bacteria build up in seats, carpets, and air vents — especially in hot Indian climates.',
@@ -95,7 +95,7 @@ export const blogPosts: BlogPost[] = [
     image: '/images/blog/how-often-to-wash-car.png',
     category: 'Maintenance',
     author: 'HydroWash Team',
-    date: '2026-01-02',
+    date: '2026-03-15',
     readTime: '4 min read',
     content: [
       'There is no single answer to how often you should wash your car — it depends on where you drive, how you park, and what protection your paint has.',
@@ -114,7 +114,7 @@ export const blogPosts: BlogPost[] = [
     image: '/images/blog/summer-uv-protection.png',
     category: 'Seasonal Care',
     author: 'HydroWash Team',
-    date: '2025-12-15',
+    date: '2026-03-15',
     readTime: '5 min read',
     content: [
       'Summer temperatures in Rajasthan and across North India regularly exceed 40°C. Prolonged UV exposure fades paint, yellows headlights, and dries out leather and plastic interiors.',
@@ -125,6 +125,25 @@ export const blogPosts: BlogPost[] = [
       'Before peak summer, book a protection check at HydroWash. We assess your coating condition, refresh hydrophobic layers, and treat interior surfaces so your car survives the season looking its best.',
     ],
   },
+  {
+  id: 'ppf-maintenance-guide',
+  title: 'PPF Maintenance Guide: Keep Your Paint Protection Film Looking New',
+  excerpt:
+    'Proper maintenance helps your Paint Protection Film stay glossy, self-healing, and long-lasting.',
+  image: '/images/blog/ppf-maintenance-guide.png',
+  category: 'PPF Care',
+  author: 'HydroWash Team',
+  date: '2026-03-15',
+  readTime: '5 min read',
+  content: [
+    'Paint Protection Film (PPF) is designed to shield your vehicle from stone chips, scratches, bug splatter, and road debris. However, regular maintenance is essential to preserve its clarity, gloss, and self-healing properties.',
+    'Avoid washing your vehicle for the first 5–7 days after PPF installation to allow the adhesive to cure completely. During this period, avoid pressure washing and harsh chemicals.',
+    'Wash your car using a pH-neutral shampoo and a soft microfiber wash mitt. Avoid abrasive brushes or automatic car washes with hard bristles, as they can damage the film over time.',
+    'Bird droppings, tree sap, insect residue, and hard water spots should be removed as soon as possible. Leaving contaminants on the film for extended periods may cause staining or reduce its appearance.',
+    'Use high-quality microfiber towels for drying and consider periodic ceramic coating designed specifically for PPF. It enhances hydrophobic performance, makes cleaning easier, and keeps the film looking fresh for years.',
+    'At HydroWash, we offer professional PPF maintenance, deep cleaning, ceramic coating for PPF, and regular inspections to ensure your investment continues protecting your vehicle while maintaining a flawless finish.',
+  ],
+},
 ];
 
 export const getAllBlogPosts = (): BlogPost[] =>

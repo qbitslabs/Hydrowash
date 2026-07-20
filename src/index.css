@@ -771,8 +771,6 @@
 }
 
 
-
-
 @keyframes brand-marquee {
   from {
     transform: translateX(0);
@@ -792,9 +790,17 @@
 }
 
 .animate-brand-marquee {
-  animation: brand-marquee 35s linear infinite;
+  animation: brand-marquee 45s linear infinite;
+  will-change: transform;
 }
 
 .animate-brand-marquee-reverse {
-  animation: brand-marquee-reverse 35s linear infinite;
+  animation: brand-marquee-reverse 45s linear infinite;
+  will-change: transform;
+}
+
+/* Pause on hover */
+.animate-brand-marquee:hover,
+.animate-brand-marquee-reverse:hover {
+  animation-play-state: paused;
 }

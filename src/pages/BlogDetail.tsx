@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { ArrowLeft, ArrowRight, Clock, User } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { Helmet } from "react-helmet-async";
 import {
   getBlogPostById,
   getRelatedBlogPosts,
@@ -25,6 +26,66 @@ const BlogDetail = () => {
 
   return (
     <div className="relative min-h-screen bg-background text-foreground overflow-x-hidden">
+
+      <Helmet>
+  <title>{post.title} | HydroWash</title>
+
+  <meta
+    name="description"
+    content={post.excerpt}
+  />
+
+  <link
+    rel="canonical"
+    href={`https://hydrowash.in/blog/${post.id}`}
+  />
+
+  <meta
+    property="og:type"
+    content="article"
+  />
+
+  <meta
+    property="og:title"
+    content={post.title}
+  />
+
+  <meta
+    property="og:description"
+    content={post.excerpt}
+  />
+
+  <meta
+    property="og:image"
+    content={post.image}
+  />
+
+  <meta
+    property="og:url"
+    content={`https://hydrowash.in/blog/${post.id}`}
+  />
+
+  <meta
+    name="twitter:card"
+    content="summary_large_image"
+  />
+
+  <meta
+    name="twitter:title"
+    content={post.title}
+  />
+
+  <meta
+    name="twitter:description"
+    content={post.excerpt}
+  />
+
+  <meta
+    name="twitter:image"
+    content={post.image}
+  />
+</Helmet>
+
       <Navbar />
 
       <main className="pt-20">
@@ -68,7 +129,7 @@ const BlogDetail = () => {
           <section className="pb-12 md:pb-16">
             <div className="section-container">
               <div className="max-w-4xl mx-auto">
-                <div className="relative aspect-[16/9] rounded-2xl overflow-hidden border border-gold/20 mb-10">
+                <div className=" rounded-2xl overflow-hidden border border-gold/20 mb-10">
                   <img
                     src={post.image}
                     alt={post.title}
