@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { publicVideos } from 'virtual:public-videos';
 
-const STUDIO_VIDEO_POSTER = '/Hero.webp';
 
 const StudioVideo = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -22,7 +21,7 @@ const StudioVideo = () => {
           observer.disconnect();
         }
       },
-      { rootMargin: '300px 0px' },
+      { rootMargin: '800px 0px' },
     );
 
     observer.observe(section);
@@ -45,10 +44,10 @@ const StudioVideo = () => {
     };
 
     playVideo();
-    video.addEventListener('loadeddata', playVideo);
+    video.addEventListener('canplay', playVideo);
 
     return () => {
-      video.removeEventListener('loadeddata', playVideo);
+      video.removeEventListener('canplay', playVideo);
     };
   }, [shouldLoad, videoSrc]);
 
@@ -65,7 +64,6 @@ const StudioVideo = () => {
           key={videoSrc}
           ref={videoRef}
           className="absolute inset-0 h-full w-full object-cover object-center"
-          poster={STUDIO_VIDEO_POSTER}
           autoPlay
           loop
           muted
