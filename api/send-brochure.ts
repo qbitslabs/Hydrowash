@@ -54,9 +54,9 @@ Our team will contact you shortly at ${phone} to discuss your requirements.
 Please find our service brochure attached for your reference.
 
 Contact Us:
-Address: Near Milk Bar Circle, Alwar, Rajasthan 301001
-Phone: +91-98765-43210
-Email: info@hydrowashcarwash.com
+Address: 01,CEB Kalimori Bridge Station Road, Alwar, Rajasthan 301001
+Phone: +91-88888-99936
+Email: info@hydrowash.in
 
 Best regards,
 HydroWash Team`,
@@ -102,7 +102,7 @@ attachments: [
           </div>
           
           <div style="background: #0A0A0B; padding: 20px; text-align: center; border-top: 1px solid #333;">
-            <p style="color: #666; font-size: 12px; margin: 0;">© 2024 HydroWash Car Wash & Detailing Studio. All rights reserved.</p>
+            <p style="color: #666; font-size: 12px; margin: 0;">© 2026 HydroWash Car Wash & Detailing Studio. All rights reserved.</p>
           </div>
         </div>
       `,
