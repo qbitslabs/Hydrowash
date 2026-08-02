@@ -103,7 +103,7 @@ const fields = [
 // ] as const;
 
 const stats = [
-  [Car, '10,000+', 'Cars Done'],
+  [Car, '15K+', 'Cars Done'],
   [Star, '4.3 ★', ' Ratings'],
   [FileText, 'INSTANT', 'PDF '],
 ] as const;
