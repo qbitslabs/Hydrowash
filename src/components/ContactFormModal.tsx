@@ -95,16 +95,16 @@ const fields = [
   },
 ] as const;
 
-const features = [
-  [ClipboardList, 'Complete', 'Service Catalogue'],
-  [Sparkles, 'Before & After', 'Results'],
-  [Gift, 'Exclusive Offers', '& Packages'],
-  [Award, 'Expert Care', 'You Can Trust'],
-] as const;
+// const features = [
+//   [ClipboardList, 'Complete', 'Service Catalogue'],
+//   [Sparkles, 'Before & After', 'Results'],
+//   [Gift, 'Exclusive Offers', '& Packages'],
+//   [Award, 'Expert Care', 'You Can Trust'],
+// ] as const;
 
 const stats = [
-  [Car, '15,000+', 'Cars Detailed'],
-  [Star, '4.8 ★', 'Customer Rating'],
+  [Car, '10,000+', 'Cars Detailed'],
+  [Star, '4.3 ★', ' Ratings'],
   [FileText, 'INSTANT', 'PDF Download'],
 ] as const;
 
@@ -376,7 +376,7 @@ const ContactFormDialog = () => {
         className="
           w-[calc(100%-1rem)]
           max-w-[520px]
-          overflow-hidden
+          overflow-y-auto
           rounded-[20px]
           border
           border-white/25
@@ -475,20 +475,7 @@ const ContactFormDialog = () => {
               HERO
           ================================================= */}
 
-          <div className="relative h-[180px] overflow-hidden px-7 pt-6">
-
-            {/* Logo */}
-
-            <div className="relative z-20 inline-block">
-              <div className="text-xl font-black tracking-tight text-white">
-                HYDRO
-                <span className="text-[#f6bf3f]">
-                  WASH
-                </span>
-              </div>
-
-              <div className="mt-1 h-[2px] w-full bg-[#f6bf3f]" />
-            </div>
+          <div className="relative h-[150px] overflow-hidden px-7 pt-6">
 
             {/* Car */}
 
@@ -559,7 +546,7 @@ const ContactFormDialog = () => {
                 FEATURES
             ================================================= */}
 
-            <div className="mt-4 grid h-[64px] grid-cols-4">
+            {/* <div className="mt-4 grid h-[64px] grid-cols-4">
 
               {features.map(
                 ([Icon, title, text], index) => (
@@ -576,7 +563,7 @@ const ContactFormDialog = () => {
                 )
               )}
 
-            </div>
+            </div> */}
 
             {/* =================================================
                 MESSAGE
@@ -864,7 +851,7 @@ const ContactFormDialog = () => {
                       items-center
                       justify-center
                       gap-2.5
-                      px-2
+                      px-1
 
                       ${
                         index < stats.length - 1
@@ -881,12 +868,7 @@ const ContactFormDialog = () => {
                         shrink-0
                         text-[#f6bf3f]
 
-                        ${
-                          label ===
-                          'Customer Rating'
-                            ? 'fill-[#f6bf3f]'
-                            : ''
-                        }
+                      
                       `}
                     />
 
