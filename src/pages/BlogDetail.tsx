@@ -34,6 +34,10 @@ const BlogDetail = () => {
     name="description"
     content={post.excerpt}
   />
+  <meta
+    name="keywords"
+    content={post.keywords}
+  />
 
   <link
     rel="canonical"

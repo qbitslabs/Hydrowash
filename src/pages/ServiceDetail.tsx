@@ -1,5 +1,6 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
+import { Helmet } from "react-helmet-async";
 import {
   ArrowLeft,
   Check,
@@ -247,6 +248,21 @@ const ServiceDetail = () => {
 
   return (
     <div className="relative min-h-screen bg-background text-foreground overflow-x-hidden">
+      <Helmet>
+        <title>{service.title} | HydroWash</title>
+        <meta name="description" content={service.description} />
+        <meta name="keywords" content={service.keywords} />
+        <link rel="canonical" href={`https://hydrowash.in/services/${service.id}`} />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={service.title} />
+        <meta property="og:description" content={service.description} />
+        <meta property="og:url" content={`https://hydrowash.in/services/${service.id}`} />
+        <meta property="og:image" content="https://hydrowash.in/images/logo.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={service.title} />
+        <meta name="twitter:description" content={service.description} />
+        <meta name="twitter:image" content="https://hydrowash.in/images/logo.png" />
+      </Helmet>
       <Navbar />
 
       <main className="pt-20">

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useScrollReveal } from "@/hooks/useScrollAnimations";
+import { Helmet } from "react-helmet-async";
 import { cn } from "@/lib/utils";
 import { X } from "lucide-react";
 import {
@@ -39,57 +40,65 @@ const GalleryPage = () => {
     image,
   }: {
     image: GalleryImage;
-  }) => {
-    return (
-      <div className="relative h-full w-full">
-        <img
-          src={image.src}
-          alt={image.alt}
-          loading="lazy"
-          decoding="async"
-          className="h-full w-full object-cover transition-all duration-700 ease-premium group-hover:scale-110 group-hover:brightness-110"
-          style={{
-            WebkitTapHighlightColor: "transparent",
-            WebkitTouchCallout: "none",
-            WebkitUserSelect: "none",
-          }}
-        />
-  
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-black/20 to-black/50 opacity-0 transition-all duration-500 group-hover:opacity-100" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-60 transition-all duration-500 sm:opacity-0 sm:group-hover:opacity-100" />
-  
-        {/* Border */}
-        <div className="absolute inset-0 rounded-inherit border-2 border-transparent transition-all duration-500 group-hover:border-gold/50" />
-        <div className="absolute inset-[2px] rounded-inherit border border-white/10 transition-all duration-500 group-hover:border-white/20" />
-  
-        {/* Caption */}
-        <div className="absolute bottom-0 left-0 right-0 translate-y-full p-3 transition-all duration-500 ease-premium sm:p-4 lg:p-6 sm:group-hover:translate-y-0">
-          <div className="rounded-lg border border-white/10 bg-black/60 p-2 backdrop-blur-lg sm:border-white/20 sm:bg-white/10 sm:p-3 lg:p-4">
-            <div className="mb-2 flex items-center gap-2">
-              <div className="h-2 w-2 rounded-full bg-gold shadow-gold" />
-  
-              <span className="micro-label text-[10px] font-semibold tracking-wider text-gold lg:text-xs">
-                {image.category.toUpperCase()}
-              </span>
-            </div>
+  }) => (
+    <div className="relative h-full w-full">
+      <img
+        src={image.src}
+        alt={image.alt}
+        loading="lazy"
+        className="h-full w-full object-cover transition-transform duration-700 ease-premium group-hover:scale-105 sm:group-hover:scale-110"
+        style={{
+          WebkitTapHighlightColor: 'transparent',
+          WebkitTouchCallout: 'none',
+          WebkitUserSelect: 'none',
+        }}
+      />
+
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-60 transition-opacity duration-500 sm:opacity-0 sm:group-hover:opacity-100" />
+
+      <div className="absolute inset-0 rounded-inherit border border-transparent transition-colors duration-500 group-hover:border-gold/40" />
+
+      <div className="absolute inset-[2px] rounded-inherit border border-white/10 transition-colors duration-500 group-hover:border-white/20" />
+
+      <div className="absolute bottom-0 left-0 right-0 translate-y-full p-4 transition-transform duration-500 ease-premium group-hover:translate-y-0">
+        <div className="rounded-lg border border-white/10 bg-black/60 p-3 backdrop-blur-lg">
+          <div className="flex items-center gap-2">
+            <div className="h-2 w-2 rounded-full bg-gold shadow-gold" />
+
+            <span className="micro-label text-[10px] font-semibold tracking-wider text-gold sm:text-xs">
+              {image.category.toUpperCase()}
+            </span>
           </div>
         </div>
-  
-        {/* Corner Accents */}
-        <div className="absolute left-1.5 top-1.5 h-6 w-6 rounded-tl-lg border-l border-t border-gold/20 transition-all duration-400 group-hover:border-gold/60 sm:left-2 sm:top-2 sm:h-8 sm:w-8 sm:border-gold/30 sm:group-hover:border-gold/60" />
-        <div className="absolute right-1.5 top-1.5 h-6 w-6 rounded-tr-lg border-r border-t border-gold/20 transition-all duration-400 group-hover:border-gold/60 sm:right-2 sm:top-2 sm:h-8 sm:w-8 sm:border-gold/30 sm:group-hover:border-gold/60" />
-        <div className="absolute bottom-1.5 left-1.5 h-6 w-6 rounded-bl-lg border-b border-l border-gold/20 transition-all duration-400 group-hover:border-gold/60 sm:bottom-2 sm:left-2 sm:h-8 sm:w-8 sm:border-gold/30 sm:group-hover:border-gold/60" />
-        <div className="absolute bottom-1.5 right-1.5 h-6 w-6 rounded-br-lg border-b border-r border-gold/20 transition-all duration-400 group-hover:border-gold/60 sm:bottom-2 sm:right-2 sm:h-8 sm:w-8 sm:border-gold/30 sm:group-hover:border-gold/60" />
-  
-        {/* Shimmer */}
-        <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-1000 ease-out group-hover:translate-x-full" />
       </div>
-    );
-  };
+
+      <div className="absolute left-2 top-2 h-8 w-8 rounded-tl-lg border-l border-t border-gold/30 transition-colors duration-300 group-hover:border-gold/60" />
+      <div className="absolute right-2 top-2 h-8 w-8 rounded-tr-lg border-r border-t border-gold/30 transition-colors duration-300 group-hover:border-gold/60" />
+      <div className="absolute bottom-2 left-2 h-8 w-8 rounded-bl-lg border-b border-l border-gold/30 transition-colors duration-300 group-hover:border-gold/60" />
+      <div className="absolute bottom-2 right-2 h-8 w-8 rounded-br-lg border-b border-r border-gold/30 transition-colors duration-300 group-hover:border-gold/60" />
+
+      <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-1000 group-hover:translate-x-full" />
+    </div>
+  );
 
   return (
     <div className="relative min-h-screen bg-background text-foreground overflow-x-hidden">
+      <Helmet>
+        <title>Gallery | HydroWash</title>
+        <meta name="description" content="Browse our complete collection of transformations. Each project showcases our commitment to perfection." />
+        <meta name="keywords" content="Images,car detailing, ceramic coating, paint protection film (PPF), car washing, vehicle care, Hydrowash, premium detailing, premium car care, premium car wash, premium car polishing, premium car washing, premium car detailing" />
+        <link rel="canonical" href="https://hydrowash.in/gallery" />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="Gallery | HydroWash" />
+        <meta property="og:description" content="Browse our complete collection of transformations. Each project showcases our commitment to perfection." />
+        <meta property="og:url" content="https://hydrowash.in/gallery" />
+        <meta property="og:image" content="https://hydrowash.in/images/logo.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Gallery | HydroWash" />
+        <meta name="twitter:description" content="Browse our complete collection of transformations. Each project showcases our commitment to perfection." />
+        <meta name="twitter:image" content="https://hydrowash.in/images/logo.png" />
+        <meta name="twitter:url" content="https://hydrowash.in/gallery" />
+      </Helmet>
       {/* Navigation */}
       <Navbar />
       
@@ -156,27 +165,25 @@ const GalleryPage = () => {
         {/* Gallery Grid - Bento Grid */}
         <div className="section-container pb-16 sm:pb-24 md:pb-32">
   <div className="w-full px-0 sm:px-4 md:px-0">
-    <div className="grid h-full auto-rows-[200px] grid-cols-2 gap-2 sm:grid-cols-2 sm:gap-3 lg:grid-cols-4 md:gap-4">
-      {visibleImages.map((image, index) => (
-        <div
-          key={image.id}
-          onClick={() => setLightboxImage(image)}
-          style={{ transitionDelay: `${index * 50}ms` }}
-          className={cn(
-            "group relative cursor-pointer overflow-hidden rounded-xl",
-            "bg-gradient-to-br from-card/50 to-card/80 hover:from-gold/20 hover:to-gold/30",
-            "shadow-lg shadow-black/10 transition-all duration-700 ease-premium",
-            "hover:-translate-y-1 hover:scale-[1.02] hover:shadow-2xl hover:shadow-black/20",
-            "active:scale-95",
-            isVisible
-              ? "translate-y-0 opacity-100"
-              : "translate-y-10 opacity-0"
-          )}
-        >
-          <GalleryTileContent image={image} />
-        </div>
-      ))}
-    </div>
+  <div className="grid h-full auto-rows-[300px] grid-cols-2 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {filteredImages.map((image, index) => (
+          <div
+            key={image.id}
+            onClick={() => setLightboxImage(image)}
+            style={{ transitionDelay: `${index * 80}ms` }}
+            className={cn(
+              "group relative cursor-pointer overflow-hidden rounded-xl bg-card/60 shadow-lg transition-all duration-500",
+              "hover:-translate-y-1 hover:scale-[1.02]",
+              "hover:shadow-xl hover:shadow-black/20",
+              isVisible
+                ? "translate-y-0 opacity-100"
+                : "translate-y-10 opacity-0"
+            )}
+          >
+            <GalleryTileContent image={image} />
+          </div>
+        ))}
+      </div> 
 
     {filteredImages.length === 0 && (
       <div className="py-16 text-center">

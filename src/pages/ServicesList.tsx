@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { Helmet } from "react-helmet-async";
 import {
   ArrowRight,
   Shield,
@@ -63,6 +64,22 @@ const ServicesList = () => {
 
   return (
     <div className="relative min-h-screen bg-background text-foreground overflow-x-hidden">
+      <Helmet>
+        <title>Services | HydroWash</title>
+        <meta name="description" content="Explore our premium car care services at Hydrowash. From protective coatings to detailed interior and exterior cleaning, we offer a wide range of services to keep your vehicle looking its best." />
+        <meta name="keywords" content="car detailing, ceramic coating, paint protection film (PPF), car washing, vehicle care, Hydrowash, premium detailing, premium car care, premium car wash, premium car polishing, premium car washing, premium car detailing" />
+        <link rel="canonical" href="https://hydrowash.in/services" />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="Services | HydroWash" />
+        <meta property="og:description" content="Explore our premium car care services at Hydrowash. From protective coatings to detailed interior and exterior cleaning, we offer a wide range of services to keep your vehicle looking its best." />
+        <meta property="og:url" content="https://hydrowash.in/services" />
+        <meta property="og:image" content="https://hydrowash.in/images/logo.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Services | HydroWash" />
+        <meta name="twitter:description" content="Explore our premium car care services at Hydrowash. From protective coatings to detailed interior and exterior cleaning, we offer a wide range of services to keep your vehicle looking its best." />
+        <meta name="twitter:image" content="https://hydrowash.in/images/logo.png" />  
+        <meta name="twitter:url" content="https://hydrowash.in/services" />
+      </Helmet>
       <Navbar />
 
       <main className="pt-20">

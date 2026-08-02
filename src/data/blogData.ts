@@ -2,6 +2,7 @@ export interface BlogPost {
   id: string;
   title: string;
   excerpt: string;
+  keywords: string;
   content: string[];
   image: string;
   category: string;
@@ -14,6 +15,7 @@ export const blogPosts: BlogPost[] = [
   {
     id: 'ceramic-coating-vs-ppf',
     title: 'Ceramic Coating vs PPF: Which Protection Is Right for Your Car?',
+    keywords: 'ceramic coating, ppf, paint protection film, car protection, car care, car maintenance',
     excerpt:
       'Compare ceramic coating and paint protection film to choose the best shield for your vehicle in Indian driving conditions.',
     image: '/images/blog/ceramic-coating-vs-ppf.png',
@@ -32,6 +34,7 @@ export const blogPosts: BlogPost[] = [
   {
     id: 'monsoon-car-care-tips',
     title: '7 Essential Monsoon Car Care Tips Every Owner Should Know',
+    keywords: 'monsoon car care, car care, car maintenance, car protection, car care tips, car care guide',
     excerpt:
       'Protect your car from rust, fungus, and water damage during the rainy season with these expert maintenance tips.',
     image: '/images/blog/monsoon-car-care-tips.png',
@@ -52,6 +55,7 @@ export const blogPosts: BlogPost[] = [
   {
     id: 'paint-correction-guide',
     title: 'What Is Paint Correction and When Does Your Car Need It?',
+    keywords: 'paint correction, paint correction guide, paint correction tips, paint correction guide, paint correction tips',
     excerpt:
       'Learn how paint correction removes swirl marks and scratches to restore a mirror-like factory finish.',
     image: '/images/blog/paint-correction-guide.png',
@@ -71,6 +75,7 @@ export const blogPosts: BlogPost[] = [
   {
     id: 'interior-detailing-benefits',
     title: 'Why Professional Interior Detailing Is Worth Every Rupee',
+    keywords: 'professional interior detailing, interior detailing, interior detailing guide, interior detailing tips, interior detailing guide',
     excerpt:
       'Discover how deep interior cleaning improves hygiene, comfort, and resale value for your vehicle.',
     image: '/images/blog/interior-detailing-benefits.png',
@@ -90,6 +95,7 @@ export const blogPosts: BlogPost[] = [
   {
     id: 'how-often-to-wash-car',
     title: 'How Often Should You Wash Your Car in India?',
+    keywords: 'how often to wash your car, car washing schedule, car washing guide, car washing tips, car washing guide',
     excerpt:
       'A practical washing schedule based on climate, usage, and whether your car has protective coatings.',
     image: '/images/blog/how-often-to-wash-car.png',
@@ -109,6 +115,7 @@ export const blogPosts: BlogPost[] = [
   {
     id: 'summer-uv-protection',
     title: 'Summer UV Protection: Keeping Your Car\'s Paint and Interior Safe',
+    keywords: 'summer uv protection, uv protection, uv protection guide, uv protection tips, uv protection guide',
     excerpt:
       'Intense Indian summers can fade paint and crack dashboards. Here is how to fight back.',
     image: '/images/blog/summer-uv-protection.png',
@@ -128,6 +135,7 @@ export const blogPosts: BlogPost[] = [
   {
   id: 'ppf-maintenance-guide',
   title: 'PPF Maintenance Guide: Keep Your Paint Protection Film Looking New',
+  keywords: 'ppf maintenance, ppf maintenance guide, ppf maintenance tips, ppf maintenance guide, ppf maintenance tips',
   excerpt:
     'Proper maintenance helps your Paint Protection Film stay glossy, self-healing, and long-lasting.',
   image: '/images/blog/ppf-maintenance-guide.png',

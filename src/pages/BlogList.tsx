@@ -4,12 +4,71 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { getAllBlogPosts } from '@/data/blogData';
 import { cn } from '@/lib/utils';
+import { Helmet } from "react-helmet-async";
 
 const BlogList = () => {
   const posts = getAllBlogPosts();
 
   return (
     <div className="relative min-h-screen bg-background text-foreground overflow-x-hidden">
+
+
+<Helmet>
+  <title>Blogs | HydroWash</title>
+
+  <meta
+    name="description"
+    content= "Explore expert tips on car detailing, ceramic coating, paint protection film (PPF), car washing, and vehicle care from Hydrowash."
+  />
+  <meta name="keywords" content="car detailing, ceramic coating, paint protection film (PPF), car washing, vehicle care, Hydrowash" />
+
+  <link
+    rel="canonical"
+    href={`https://hydrowash.in/blogs`}
+  />
+
+  <meta
+    property="og:type"
+    content="article"
+  />
+
+  <meta
+    property="og:title"
+    content="Blogs | HydroWash"
+  />
+
+  <meta
+    property="og:description"
+    content= "Explore expert tips on car detailing, ceramic coating, paint protection film (PPF), car washing, and vehicle care from Hydrowash."
+  />
+
+
+  <meta
+    property="og:url"
+    content={`https://hydrowash.in/blogs`}
+  />
+
+  <meta
+    name="twitter:card"
+    content="summary_large_image"
+  />
+
+  <meta
+    name="twitter:title"
+    content="Blogs | HydroWash"
+  />
+
+  <meta
+    name="twitter:description"
+    content="Explore expert tips on car detailing, ceramic coating, paint protection film (PPF), car washing, and vehicle care from Hydrowash."
+  />
+
+  <meta
+    name="twitter:image"
+    content="https://hydrowash.in/images/logo.png"
+  />
+</Helmet>
+
       <Navbar />
 
       <main className="pt-20">

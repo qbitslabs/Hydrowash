@@ -1,6 +1,6 @@
 // Comprehensive service data for detailed pages
 export interface ServicePackage {
-  name: string;
+  name: string; 
   price: string;
   duration: string;
   features: string[];
@@ -27,6 +27,8 @@ export interface BeforeAfterImage {
 export interface ServiceDetail {
   id: string;
   title: string;
+  keywords: string;
+  description: string; 
   subtitle: string;
   mainIcon: string;
   shortDescription: string;
@@ -54,6 +56,8 @@ export const servicesData: Record<string, ServiceDetail> = {
   "paint-protection-film": {
     id: "paint-protection-film",
     title: "PPF (Paint Protection Film)",
+    keywords: "paint protection film, ppf, paint protection, paint protection film, ppf, paint protection, paint protection film, ppf",
+    description: "Paint Protection Film (PPF) is a transparent, ultra-durable urethane film applied to your vehicle's painted surfaces. This advanced protective layer acts as an invisible shield against road debris, stone chips, bug splatter, bird droppings, and minor abrasions. Our PPF features self-healing technology that automatically repairs minor scratches when exposed to heat, ensuring your vehicle maintains a flawless finish for years.",
     subtitle: "The Ultimate Invisible Shield for Your Vehicle",
     mainIcon: "Shield",
     shortDescription: "Self-healing urethane film that protects your paint from stone chips, scratches, and environmental damage.",
@@ -131,6 +135,8 @@ export const servicesData: Record<string, ServiceDetail> = {
   "ceramic-coating": {
     id: "ceramic-coating",
     title: "Ceramic Coating",
+    keywords: "ceramic coating, ceramic coating, ceramic coating, ceramic coating, ceramic coating",
+    description: "Ceramic coating is a liquid polymer that contains nano-ceramic particles suspended in a clear resin. When applied to paint, these particles bond at the molecular level to create a glass-like protective layer. Unlike waxes or sealants that sit on top, ceramic coatings become one with your paint, offering years of protection rather than months.",
     subtitle: "Nano-Technology Protection with Showroom Shine",
     mainIcon: "Droplets",
     shortDescription: "Professional SiO2-based nano-coating providing unmatched gloss, hydrophobicity, and 5+ year protection.",
@@ -208,6 +214,8 @@ export const servicesData: Record<string, ServiceDetail> = {
   "graphene-coating": {
     id: "graphene-coating",
     title: "Graphene Coating",
+    keywords: "graphene coating, graphene coating Alwar, graphene coating in Alwar, graphene coating in Alwar, graphene coating Hydrowash",
+    description: "Graphene is a single layer of carbon atoms arranged in a hexagonal lattice - the thinnest, strongest material known to science. When infused into our coating formula, graphene's unique properties create a denser, more durable protective layer that outperforms traditional SiO2 coatings in every aspect.",
     subtitle: "Nobel Prize-Winning Material Meets Automotive Protection",
     mainIcon: "Layers",
     shortDescription: "Next-generation graphene-infused coating with superior heat dissipation, reduced water spotting, and 7+ year durability.",
@@ -284,6 +292,8 @@ export const servicesData: Record<string, ServiceDetail> = {
   "premium-detailing": {
     id: "premium-detailing",
     title: "Premium Detailing (Exterior & Interior)",
+    keywords: "premium detailing, premium detailing in Alwar, car detailing, detailing , premium car detailing Alwar",
+    description: "Our state-of-the-art detailing studio combines advanced equipment, premium products, and master craftsmanship to deliver transformational results.",
     subtitle: "State-of-the-Art Detailing Facility",
     mainIcon: "Gem",
     shortDescription: "Our state-of-the-art detailing studio combines advanced equipment, premium products, and master craftsmanship to deliver transformational results.",
@@ -360,6 +370,8 @@ export const servicesData: Record<string, ServiceDetail> = {
   "interior-detailing": {
     id: "interior-detailing",
     title: "Car Interior Deep Cleaning",
+    keywords: "car interior deep cleaning, car interior deep cleaning in Alwar, car interior deep cleaning in Alwar, car interior deep cleaning Hydrowash",
+    description: "Our Intensive Interior Detailing service is a comprehensive deep-cleaning and restoration process that transforms your vehicle's cabin to better-than-new condition. Using commercial-grade steam cleaners, hot water extraction machines, and premium leather treatments, we eliminate odors, stains, allergens, and bacteria while rejuvenating every surface. From headliner to floor mats, no area is overlooked.", 
     subtitle: "Deep Clean & Restoration for Your Vehicle's Cabin",
     mainIcon: "Car",
     shortDescription: "Complete interior rejuvenation using steam cleaning, extraction shampooing, and leather conditioning for a like-new cabin.",
@@ -437,6 +449,8 @@ export const servicesData: Record<string, ServiceDetail> = {
   "headlight-restoration": {
     id: "headlight-restoration",
     title: "Headlight Restoration",
+    keywords: "headlight restoration, headlight restoration Alwar, headlight restoration in Alwar, headlight restoration Hydrowash",
+    description: "Our Headlight Restoration service transforms foggy, yellowed, or oxidized headlights back to crystal-clear condition. Using professional wet-sanding techniques, machine polishing, and UV-resistant sealing, we remove years of sun damage and restore nighttime visibility. This service improves safety and appearance while avoiding the high cost of headlight replacement.",
     subtitle: "Crystal Clear Visibility & Like-New Appearance",
     mainIcon: "Sun",
     shortDescription: "Professional restoration of oxidized, yellowed headlights using wet-sanding, polishing, and UV-resistant sealing.",
@@ -513,6 +527,8 @@ export const servicesData: Record<string, ServiceDetail> = {
   "rubbing-polishing": {
     id: "rubbing-polishing",
     title: "Compounding and Polishing",
+    keywords: "compounding and polishing, compounding and polishing in Alwar, compounding and polishing  Alwar, compounding and polishing Hydrowash",
+    description: "Our Rubbing & Polishing service is a specialized paint correction treatment designed to restore your vehicle's finish to its original glory. Using professional-grade rubbing compounds and machine polishers, we remove surface imperfections including swirl marks, light scratches, oxidation, and holograms. This service reveals the true depth and clarity of your paint before applying protective sealants or wax.",
     subtitle: "Professional Paint Correction & Gloss Restoration",
     mainIcon: "RotateCw",
     shortDescription: "Multi-stage machine polishing and rubbing compound treatment to remove swirl marks, scratches, and restore showroom shine.",
@@ -589,6 +605,8 @@ export const servicesData: Record<string, ServiceDetail> = {
   "hydrowash-wax": {
     id: "hydrowash-wax",
     title: "Premium Hydrowash & Wax",
+    keywords: "premium hydrowash & wax, premium hydrowash & wax in Alwar, premium hydrowash & wax in Alwar, premium hydrowash & wax Hydrowash",
+    description: "Our Premium Hydrowash & Wax service combines meticulous hand washing with premium wax protection. Unlike quick automated washes, our hydrowash uses pressurized water and pH-neutral cleaners to safely remove dirt without scratching. The hand-applied carnauba or synthetic wax creates a hydrophobic barrier that protects your paint, enhances gloss, and makes future cleaning easier for up to 3 months.",
     subtitle: "Deep Clean with Hand-Applied Protection",
     mainIcon: "Waves",
     shortDescription: "Thorough hand wash with high-quality carnauba wax application for a glossy, protected finish that lasts for months.",
@@ -666,6 +684,8 @@ export const servicesData: Record<string, ServiceDetail> = {
   "anti-rust-coating": {
     id: "anti-rust-coating",
     title: "Anti Rust Coating",
+    keywords: "anti rust coating, anti rust coating in Alwar, anti rust coating in Alwar, anti rust coating Hydrowash",
+    description: "Our Anti Rust Coating service is a specialized coating treatment designed to protect your vehicle's paint from rust and corrosion. Using professional-grade rust inhibitors and protective coatings, we prevent the formation of rust and extend the life of your vehicle's paint.",
     subtitle: "Complete Rust & Corrosion Protection",
     mainIcon: "Wrench",
     shortDescription: "Rubberized protective coating for undercarriage preventing rust, corrosion, and stone chip damage.",
@@ -742,6 +762,8 @@ export const servicesData: Record<string, ServiceDetail> = {
   "alloy-treatment": {
     id: "alloy-treatment",
     title: "Alloy Treatment",
+    keywords: "alloy treatment, alloy treatment in Alwar, alloy treatment in Alwar, alloy treatment Hydrowash",
+    description: "Our Alloy Treatment service applies a specialized alloy coating specifically formulated for wheels. This heat-resistant coating creates a protective barrier against brake dust, road salt, and corrosion while making future cleaning effortless. The coating withstands high brake temperatures and maintains a brilliant shine for months.",
     subtitle: "Ceramic Protection for Your Wheels",
     mainIcon: "CircleDot",
     shortDescription: "Specialized ceramic coating for alloy wheels that prevents brake dust buildup and makes cleaning effortless.",
@@ -819,6 +841,8 @@ export const servicesData: Record<string, ServiceDetail> = {
   "engine-coating": {
     id: "engine-coating",
     title: "Engine Coating",
+    keywords: "engine coating, engine coating Alwar, engine coating in Alwar, engine coating Hydrowash",
+    description: "Our Engine Coating service is a specialized coating treatment designed to protect your vehicle's engine from rust and corrosion. Using professional-grade rust inhibitors and protective coatings, we prevent the formation of rust and extend the life of your vehicle's engine.",
     subtitle: "Protect Your Engine Bay",
     mainIcon: "Cog",
     shortDescription: "Heat-resistant protective coating for engine bay components that prevents dust buildup and maintains showroom appearance.",
@@ -896,6 +920,8 @@ export const servicesData: Record<string, ServiceDetail> = {
   "ac-vent-treatment": {
     id: "ac-vent-treatment",
     title: "AC Vent Treatment",
+    keywords: "ac vent treatment, ac vent treatment in Alwar, ac vent treatment Alwar, ac vent treatment Hydrowash",
+    description: "Our AC Vent Treatment is a comprehensive sanitization process that eliminates bacteria, mold, and odors from your vehicle's entire HVAC system. Using specialized foaming agents, antimicrobial solutions, and ozone treatment, we clean vents, ducts, and evaporator coils - the source of most vehicle odors. Ensures fresh, healthy cabin air and improved AC efficiency.",
     subtitle: "Fresh, Healthy Cabin Air",
     mainIcon: "Wind",
     shortDescription: "Deep AC system sanitization using antimicrobial treatment and ozone therapy to eliminate bacteria, mold, and odors.",
@@ -973,6 +999,8 @@ export const servicesData: Record<string, ServiceDetail> = {
   "bike-ppf": {
     id: "bike-ppf",
     title: "Bike PPF",
+    keywords: "bike ppf, bike ppf in Alwar, bike ppf Alwar, bike ppf Hydrowash",
+    description: "Our Bike PPF service provides the same invisible armor protection for motorcycles as we do for cars. Using precision-cut PPF designed specifically for motorcycle contours, we protect tank, fenders, and other painted surfaces from stone chips, road debris, and scratches while maintaining the bike's original finish and gloss. Essential for preserving your motorcycle's appearance.",
     subtitle: "Paint Protection for Motorcycles",
     mainIcon: "Zap",
     shortDescription: "Advanced paint protection film specifically designed for motorcycles that protects against stone chips and scratches.",
@@ -1050,6 +1078,8 @@ export const servicesData: Record<string, ServiceDetail> = {
   "car-wrap": {
     id: "car-wrap",
     title: "Car Wrap",
+    keywords: "car wrap, car wrap in Alwar, car wrap Alwar, car wrap Hydrowash",
+    description: "Our Car Wrap service completely transforms your vehicle's appearance with premium vinyl films. Whether you want a complete color change, protective clear wrap, or custom graphics, our professional installation delivers stunning results. The wrap protects your original paint from UV damage, scratches, and stone chips while allowing you to change your vehicle's look dramatically.",
     subtitle: "Transform Your Vehicle's Appearance",
     mainIcon: "Sparkles",
     shortDescription: "Premium vinyl car wrapping service for color change, protection, or custom graphics while protecting original paint.",
@@ -1127,6 +1157,8 @@ export const servicesData: Record<string, ServiceDetail> = {
   "steam-wash": {
     id: "steam-wash",
     title: "Steam Wash",
+    keywords: "steam wash, steam wash in Alwar, steam wash Alwar, steam wash Hydrowash",
+    description: "Our Steam Wash service utilizes cutting-edge steam cleaning technology to deliver an eco-friendly, chemical-free deep clean for your vehicle. High-temperature steam (up to 180°C) penetrates deep into surfaces, dissolving grease, grime, and bacteria without harsh chemicals. This method is safe for all vehicle surfaces, environmentally friendly, and delivers superior cleaning results while conserving water.",
     subtitle: "Eco-Friendly Deep Cleaning with High-Pressure Steam",
     mainIcon: "Wind",
     shortDescription: "Advanced steam cleaning technology using high-temperature steam to deep clean, sanitize, and restore your vehicle's exterior and interior.",
@@ -1203,6 +1235,8 @@ export const servicesData: Record<string, ServiceDetail> = {
   "trim-restoration": {
     id: "trim-restoration",
     title: "Trim Restoration",
+    keywords: "trim restoration, trim restoration in Alwar, trim restoration Alwar, trim restoration Hydrowash",
+    description: "Our Trim Restoration service transforms faded, discolored, and weathered exterior trim back to its original beauty. Using specialized trim restoration products and professional techniques, we restore black plastic, chrome, and painted trim pieces that have been damaged by UV exposure, road grime, and environmental factors. This service dramatically improves your vehicle's overall appearance and protects trim from future deterioration.",
     subtitle: "Restore Your Vehicle's Exterior Trim to Like-New Condition",
     mainIcon: "Sparkles",
     shortDescription: "Professional restoration of faded, discolored exterior trim using specialized products and techniques for lasting results.",
@@ -1265,6 +1299,8 @@ export const servicesData: Record<string, ServiceDetail> = {
   "chrome-restoration": {
     id: "chrome-restoration",
     title: "Chrome Restoration",
+    keywords: "chrome restoration, chrome restoration in Alwar, chrome restoration Alwar, chrome restoration Hydrowash",
+    description: "Our Chrome Restoration service brings dull, oxidized, and rusted chrome trim back to life. Using specialized metal polishes, rust removers, and protective sealants, we remove years of oxidation, water spots, and surface rust to restore the brilliant mirror-like shine of your vehicle's chrome accents. This service is essential for maintaining the premium appearance of chrome bumpers, grilles, trim, and wheels.",
     subtitle: "Bring Back the Shine to Your Chrome Trim",
     mainIcon: "Gem",
     shortDescription: "Professional chrome polishing and restoration to remove oxidation, rust, and restore mirror-like shine.",
@@ -1327,6 +1363,8 @@ export const servicesData: Record<string, ServiceDetail> = {
   "interior-pre-cut": {
     id: "interior-pre-cut",
     title: "Interior Pre Cut",
+    keywords: "interior pre cut, interior pre cut in Alwar, interior pre cut Alwar, interior pre cut Hydrowash",
+    description: "Our Interior Pre Cut service provides precision-cut protective film for high-wear interior areas like door panels, center console, and frequently touched surfaces. The pre-cut patterns ensure perfect fit and easy installation, protecting against scratches, spills, and wear, keeping your interior looking new.",
     subtitle: "Precision Interior Protection Film",
     mainIcon: "Car",
     shortDescription: "Professional interior protection film for high-wear areas with pre-cut patterns for perfect fit.",
@@ -1377,6 +1415,8 @@ export const servicesData: Record<string, ServiceDetail> = {
   "leather": {
     id: "leather",
     title: "Car Leather (Conditioning And Protection)",
+    keywords: "car leather, car leather in Alwar, car leather Alwar, car leather Hydrowash",
+    description: "Our Leather service provides comprehensive care for leather seats and interior leather surfaces. We clean, condition, and protect leather to keep it soft, supple, and protected from wear, spills, and UV damage, maintaining a luxurious feel.",
     subtitle: "Professional Leather Care & Protection",
     mainIcon: "Gem",
     shortDescription: "Complete leather cleaning, conditioning, and protection to keep leather surfaces soft, supple, and looking new.",

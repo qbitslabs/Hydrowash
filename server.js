@@ -132,6 +132,35 @@ HydroWash Team`,
     });
     console.log('Business email sent:', notificationEmail.messageId);
 
+    const sheetsWebhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
+    if (sheetsWebhookUrl) {
+      try {
+        const sheetsResponse = await fetch(sheetsWebhookUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name,
+            email,
+            phone,
+            service: serviceName,
+            submittedAt: new Date().toISOString(),
+          }),
+        });
+
+        if (!sheetsResponse.ok) {
+          console.error(
+            'Google Sheets logging failed:',
+            sheetsResponse.status,
+            await sheetsResponse.text(),
+          );
+        } else {
+          console.log('Lead logged to Google Sheets');
+        }
+      } catch (sheetsError) {
+        console.error('Google Sheets logging error:', sheetsError);
+      }
+    }
+
     res.json({ success: true });
   } catch (error) {
     console.error('Error sending email:', error);
