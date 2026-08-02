@@ -575,15 +575,15 @@ const ContactFormDialog = () => {
                 flex
                 items-center
                 justify-center
-                gap-2.5
+                gap-1.5
                 text-center
               "
             >
               <Mail
-                strokeWidth={2}
+                strokeWidth={1.5}
                 className="
-                  h-[18px]
-                  w-[18px]
+                  h-[12px]
+                  w-[12px]
                   shrink-0
                   text-[#f6bf3f]
                 "
