@@ -2,7 +2,7 @@
 // Update this file to change gallery images - no need to edit components
 // Supports both external URLs and local paths from public folder
 
-export type FilterCategory = 'all' | 'ppf' | 'ceramic' | 'graphene' | 'detailing' | 'interior' | 'exterior' | 'wash' | 'polishing' | 'rust-protection' | 'alloy' | 'underbody' | 'engine-ac' | 'headlight' | 'restoration';
+export type FilterCategory = 'all' | 'ppf' | 'ceramic' | 'graphene' | 'detailing' | 'interior' | 'exterior' | 'wash' | 'polishing' | 'rust-protection' | 'alloy' | 'underbody' | 'engine-ac' | 'headlight' | 'restoration' | 'garage';
 
 export interface GalleryImage {
   id: number;
@@ -84,6 +84,7 @@ export const galleryFilters: { value: FilterCategory; label: string }[] = [
   { value: 'interior', label: 'Interior' },
   { value: 'wash', label: 'Wash' },
   { value: 'restoration', label: 'Restoration' },
+  { value: 'garage', label: 'Garage' },
 ];
 
 // Helper function to get images by category

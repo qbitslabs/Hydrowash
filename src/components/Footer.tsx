@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Instagram, Facebook, Youtube, Send, MapPin } from 'lucide-react';
+import { Instagram, Facebook, Send } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const Footer = () => {

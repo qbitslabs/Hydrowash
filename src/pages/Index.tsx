@@ -78,7 +78,7 @@ const Index = () => {
         
 
         {/* Instagram Top Picks */}
-        <section id="process">
+        <section id="instagram">
           <Suspense fallback={<div className="h-64 flex items-center justify-center"><div className="h-8 w-8 animate-spin rounded-full border-2 border-gold border-t-transparent" /></div>}>
             <InstagramTopPicks />
           </Suspense>

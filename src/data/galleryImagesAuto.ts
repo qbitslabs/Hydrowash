@@ -2,7 +2,7 @@
 
 import type { GalleryImage } from './galleryData';
 
-const categoryFolders = ['ppf', 'ceramic', 'detailing', 'interior','wash', 'restoration'] as const;
+const categoryFolders = ['ppf', 'ceramic', 'detailing', 'interior', 'wash', 'restoration', 'garage'] as const;
 
 type Category = typeof categoryFolders[number];
 
@@ -15,6 +15,13 @@ const manualImageList: { path: string; category: Category }[] = [
   { path: '/images/gallery/detailing/17.webp', category: 'detailing' },
   { path: '/images/gallery/detailing/18.webp', category: 'detailing' },
   { path: '/images/gallery/detailing/8.webp', category: 'detailing' },
+  { path: '/images/gallery/detailing/IMG_2596.webp', category: 'detailing' },
+  { path: '/images/gallery/detailing/IMG_3570.webp', category: 'detailing' },
+  { path: '/images/gallery/detailing/IMG_4707.webp', category: 'detailing' },
+  { path: '/images/gallery/detailing/IMG_5074.webp', category: 'detailing' },
+  { path: '/images/gallery/detailing/IMG_9693.webp', category: 'detailing' },
+  { path: '/images/gallery/garage/IMG_3002.webp', category: 'garage' },
+  { path: '/images/gallery/garage/IMG_4567.webp', category: 'garage' },
   { path: '/images/gallery/interior/1.webp', category: 'interior' },
   { path: '/images/gallery/interior/5.webp', category: 'interior' },
   { path: '/images/gallery/ppf/10.webp', category: 'ppf' },
@@ -22,11 +29,21 @@ const manualImageList: { path: string; category: Category }[] = [
   { path: '/images/gallery/ppf/13.webp', category: 'ppf' },
   { path: '/images/gallery/ppf/2.webp', category: 'ppf' },
   { path: '/images/gallery/ppf/6.webp', category: 'ppf' },
+  { path: '/images/gallery/ppf/IMG_0169.webp', category: 'ppf' },
+  { path: '/images/gallery/ppf/IMG_0530.webp', category: 'ppf' },
+  { path: '/images/gallery/ppf/IMG_1709.webp', category: 'ppf' },
+  { path: '/images/gallery/ppf/IMG_4700.webp', category: 'ppf' },
+  { path: '/images/gallery/ppf/IMG_9409.webp', category: 'ppf' },
   { path: '/images/gallery/restoration/15.webp', category: 'restoration' },
   { path: '/images/gallery/restoration/19.webp', category: 'restoration' },
   { path: '/images/gallery/restoration/20.webp', category: 'restoration' },
   { path: '/images/gallery/restoration/4.webp', category: 'restoration' },
   { path: '/images/gallery/restoration/7.webp', category: 'restoration' },
+  { path: '/images/gallery/restoration/IMG_0823.webp', category: 'restoration' },
+  { path: '/images/gallery/restoration/IMG_4314.webp', category: 'restoration' },
+  { path: '/images/gallery/restoration/IMG_6080.webp', category: 'restoration' },
+  { path: '/images/gallery/wash/IMG_3546.webp', category: 'wash' },
+  { path: '/images/gallery/wash/IMG_8928.webp', category: 'wash' },
 ];
 
 const BEFORE_REGEX = /-before$|-b4$/i;

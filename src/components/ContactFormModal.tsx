@@ -3,21 +3,16 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import {
-  Award,
   Car,
-  ClipboardList,
   FileText,
-  Gift,
   ListChecks,
   Loader2,
   Mail,
   MessageCircle,
   Send,
-  Sparkles,
   Star,
   User,
   X,
-  type LucideIcon,
 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -95,12 +90,6 @@ const fields = [
   },
 ] as const;
 
-// const features = [
-//   [ClipboardList, 'Complete', 'Service Catalogue'],
-//   [Sparkles, 'Before & After', 'Results'],
-//   [Gift, 'Exclusive Offers', '& Packages'],
-//   [Award, 'Expert Care', 'You Can Trust'],
-// ] as const;
 
 const stats = [
   [Car, '15K+', 'Cars Done'],
@@ -113,10 +102,10 @@ const stats = [
 ========================================================= */
 
 const inputClass =
-  'h-[42px] rounded-lg border-white/35 bg-black/75 pl-11 text-[13px] font-medium text-white shadow-none placeholder:text-white/60 focus-visible:border-[#f6bf3f] focus-visible:ring-1 focus-visible:ring-[#f6bf3f]/50';
+  'h-[38px] sm:h-[42px] rounded-lg border-white/35 bg-black/75 pl-10 sm:pl-11 text-[12px] sm:text-[13px] font-medium text-white shadow-none placeholder:text-white/60 focus-visible:border-[#f6bf3f] focus-visible:ring-1 focus-visible:ring-[#f6bf3f]/50';
 
 const iconClass =
-  'pointer-events-none absolute left-3.5 top-1/2 z-10 h-[18px] w-[18px] -translate-y-1/2 text-white/75';
+  'pointer-events-none absolute left-3 sm:left-3.5 top-1/2 z-10 h-4 w-4 sm:h-[18px] sm:w-[18px] -translate-y-1/2 text-white/75';
 
 const errorClass =
   'pl-1 text-[10px] font-medium leading-none text-red-400';
@@ -243,42 +232,6 @@ export const ContactFormTrigger = ({
   );
 };
 
-/* =========================================================
-   FEATURE
-========================================================= */
-
-const Feature = ({
-  icon: Icon,
-  title,
-  text,
-  last,
-}: {
-  icon: LucideIcon;
-  title: string;
-  text: string;
-  last: boolean;
-}) => (
-  <div
-    className={`
-      flex flex-col items-center justify-center
-      px-2 text-center
-      ${last ? '' : 'border-r border-white/25'}
-    `}
-  >
-    <Icon
-      strokeWidth={2}
-      className="mb-1.5 h-[22px] w-[22px] text-[#f6bf3f]"
-    />
-
-    <strong className="text-[9px] font-bold uppercase leading-[11px] text-white">
-      {title}
-    </strong>
-
-    <span className="mt-0.5 text-[8px] font-medium uppercase leading-[10px] text-white/75">
-      {text}
-    </span>
-  </div>
-);
 
 /* =========================================================
    DIALOG
@@ -374,10 +327,12 @@ const ContactFormDialog = () => {
     >
       <DialogContent
         className="
-          w-[calc(100%-1rem)]
-          max-w-[520px]
+          w-[calc(100%-2rem)]
+          max-w-[430px]
+          max-h-[92dvh]
           overflow-y-auto
-          rounded-[20px]
+          rounded-2xl
+          sm:rounded-[20px]
           border
           border-white/25
           bg-[#050505]
@@ -444,12 +399,16 @@ const ContactFormDialog = () => {
             aria-label="Close brochure form"
             className="
               absolute
-              right-4
-              top-4
+              right-3
+              top-3
+              sm:right-4
+              sm:top-4
               z-50
               flex
-              h-9
-              w-9
+              h-8
+              w-8
+              sm:h-9
+              sm:w-9
               items-center
               justify-center
               rounded-full
@@ -467,7 +426,7 @@ const ContactFormDialog = () => {
           >
             <X
               strokeWidth={2.5}
-              className="h-5 w-5"
+              className="h-4 w-4 sm:h-5 sm:w-5"
             />
           </button>
 
@@ -475,25 +434,7 @@ const ContactFormDialog = () => {
               HERO
           ================================================= */}
 
-          <div className="relative h-[150px] overflow-hidden px-7 pt-6">
-
-            {/* Car */}
-
-            {/* <img
-              src="/Hero.webp"
-              alt="HydroWash premium detailed vehicle"
-              className="
-                absolute
-                bottom-[-12px]
-                right-[-20px]
-                h-[175px]
-                w-auto
-                max-w-[60%]
-                object-contain
-                object-right-bottom
-                drop-shadow-[0_20px_25px_rgba(0,0,0,.9)]
-              "
-            /> */}
+          <div className="relative overflow-hidden px-5 pt-5 pb-1 sm:px-7 sm:pt-6 sm:h-[135px]">
 
             {/* Headline */}
 
@@ -501,22 +442,23 @@ const ContactFormDialog = () => {
               className="
                 relative
                 z-10
-                mt-6
-                text-[29px]
+                mt-1
+                sm:mt-4
+                text-[21px]
+                sm:text-[27px]
                 font-black
                 uppercase
-                leading-[0.98]
-                tracking-[-0.025em]
+                leading-[1.08]
+                sm:leading-[0.98]
+                tracking-tight
                 text-white
               "
             >
               Get Our
-              <br />
-
-              Premium Service
-              <br />
-
-              <span className="text-[#f6bf3f]">
+              <span className="hidden sm:inline"><br /></span>
+              {' '}Premium Service
+              <span className="hidden sm:inline"><br /></span>
+              {' '}<span className="text-[#f6bf3f]">
                 Brochure
               </span>
             </DialogTitle>
@@ -527,43 +469,23 @@ const ContactFormDialog = () => {
               CONTENT
           ================================================= */}
 
-          <div className="px-7 pb-5">
+          <div className="px-5 pb-4 sm:px-7 sm:pb-5">
 
             <DialogDescription
               className="
-                text-[12px]
+                text-[11px]
+                sm:text-[12px]
                 font-medium
-                leading-[18px]
+                leading-tight
+                sm:leading-[18px]
                 text-white/80
               "
             >
               Everything you need before booking.
-              <br />
-              Get our complete service guide instantly.
+              <span className="hidden sm:inline"><br /></span>
+              {' '}Get our complete service guide instantly.
             </DialogDescription>
 
-            {/* =================================================
-                FEATURES
-            ================================================= */}
-
-            {/* <div className="mt-4 grid h-[64px] grid-cols-4">
-
-              {features.map(
-                ([Icon, title, text], index) => (
-                  <Feature
-                    key={title}
-                    icon={Icon}
-                    title={title}
-                    text={text}
-                    last={
-                      index ===
-                      features.length - 1
-                    }
-                  />
-                )
-              )}
-
-            </div> */}
 
             {/* =================================================
                 MESSAGE
@@ -571,7 +493,8 @@ const ContactFormDialog = () => {
 
             <div
               className="
-                mt-4
+                mt-2.5
+                sm:mt-4
                 flex
                 items-center
                 justify-center
@@ -582,8 +505,8 @@ const ContactFormDialog = () => {
               <Mail
                 strokeWidth={1.5}
                 className="
-                  h-[12px]
-                  w-[12px]
+                  h-3
+                  w-3
                   shrink-0
                   text-[#f6bf3f]
                 "
@@ -591,9 +514,10 @@ const ContactFormDialog = () => {
 
               <p
                 className="
-                  text-[11px]
+                  text-[10px]
+                  sm:text-[11px]
                   font-medium
-                  leading-[16px]
+                  leading-[15px]
                   text-white/80
                 "
               >
@@ -612,7 +536,7 @@ const ContactFormDialog = () => {
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(submit)}
-                className="mt-3 space-y-2"
+                className="mt-2.5 sm:mt-3 space-y-1.5 sm:space-y-2"
               >
 
                 {/* TEXT FIELDS */}
@@ -695,13 +619,16 @@ const ContactFormDialog = () => {
                           <FormControl>
                             <SelectTrigger
                               className="
-                                h-[42px]
+                                h-[38px]
+                                sm:h-[42px]
                                 rounded-lg
                                 border-white/35
                                 bg-black/75
-                                pl-11
+                                pl-10
+                                sm:pl-11
                                 pr-3
-                                text-[13px]
+                                text-[12px]
+                                sm:text-[13px]
                                 font-medium
                                 text-white
                                 shadow-none
@@ -764,7 +691,8 @@ const ContactFormDialog = () => {
                   disabled={loading}
                   className="
                     group
-                    h-[48px]
+                    h-[42px]
+                    sm:h-[48px]
                     w-full
                     rounded-lg
                     border
@@ -773,7 +701,8 @@ const ContactFormDialog = () => {
                     from-[#ffdc72]
                     via-[#f6bf3f]
                     to-[#d99b1e]
-                    text-[13px]
+                    text-[12px]
+                    sm:text-[13px]
                     font-black
                     uppercase
                     tracking-[0.02em]
@@ -802,8 +731,10 @@ const ContactFormDialog = () => {
                         className="
                           mr-2
                           flex
-                          h-8
-                          w-8
+                          h-6
+                          w-6
+                          sm:h-7
+                          sm:w-7
                           items-center
                           justify-center
                           rounded-full
@@ -813,7 +744,7 @@ const ContactFormDialog = () => {
                       >
                         <Send
                           strokeWidth={2.5}
-                          className="h-4 w-4"
+                          className="h-3 w-3 sm:h-3.5 sm:w-3.5"
                         />
                       </span>
 
@@ -831,9 +762,11 @@ const ContactFormDialog = () => {
 
             <div
               className="
-                mt-3
+                mt-2.5
+                sm:mt-3
                 grid
-                h-[64px]
+                h-[48px]
+                sm:h-[60px]
                 grid-cols-3
                 overflow-hidden
                 rounded-lg
@@ -850,7 +783,8 @@ const ContactFormDialog = () => {
                       flex
                       items-center
                       justify-center
-                      gap-2.5
+                      gap-1.5
+                      sm:gap-2.5
                       px-1
 
                       ${
@@ -862,21 +796,22 @@ const ContactFormDialog = () => {
                   >
                     <Icon
                       strokeWidth={2}
-                      className={`
-                        h-[22px]
-                        w-[22px]
+                      className="
+                        h-4
+                        w-4
+                        sm:h-[20px]
+                        sm:w-[20px]
                         shrink-0
                         text-[#f6bf3f]
-
-                      
-                      `}
+                      "
                     />
 
                     <div>
                       <strong
                         className="
                           block
-                          text-[13px]
+                          text-[11px]
+                          sm:text-[13px]
                           font-black
                           leading-none
                           text-white
@@ -887,9 +822,11 @@ const ContactFormDialog = () => {
 
                       <span
                         className="
-                          mt-1.5
+                          mt-0.5
+                          sm:mt-1
                           block
-                          text-[8px]
+                          text-[7.5px]
+                          sm:text-[8px]
                           font-medium
                           uppercase
                           leading-none

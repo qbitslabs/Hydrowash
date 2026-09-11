@@ -8,7 +8,7 @@ const __dirname = path.dirname(__filename);
 const galleryDir = path.join(__dirname, '../public/images/gallery');
 const outputFile = path.join(__dirname, '../src/data/galleryImagesAuto.ts');
 
-const categoryFolders = ['ppf', 'ceramic',  'detailing', 'interior', 'wash','restoration'];
+const categoryFolders = ['ppf', 'ceramic', 'detailing', 'interior', 'wash', 'restoration', 'garage'];
 
 function scanGalleryFolder() {
   const images = [];
@@ -54,17 +54,17 @@ function generateGalleryImagesFile(imageList) {
 
 import type { GalleryImage } from './galleryData';
 
-const categoryFolders = ['ppf', 'ceramic', 'detailing', 'interior','wash', 'restoration'] as const;
+const categoryFolders = ['ppf', 'ceramic', 'detailing', 'interior', 'wash', 'restoration', 'garage'] as const;
 
 type Category = typeof categoryFolders[number];
 
 const manualImageList: { path: string; category: Category }[] = [
 ${sortedList
-  .map(
-    ({ path, category }) =>
-      `  { path: '${path}', category: '${category}' },`
-  )
-  .join('\n')}
+      .map(
+        ({ path, category }) =>
+          `  { path: '${path}', category: '${category}' },`
+      )
+      .join('\n')}
 ];
 
 const BEFORE_REGEX = /-before$|-b4$/i;
