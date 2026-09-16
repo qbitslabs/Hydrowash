@@ -25,7 +25,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     // Create transporter with Gmail SMTP by default
-    const smtpPort = Number(process.env.SMTP_PORT) || 587;
+    const smtpPort = Number(process.env.SMTP_PORT) || 465;
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST || 'smtpout.secureserver.net',
       port: smtpPort || 465,
